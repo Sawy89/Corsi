@@ -5,27 +5,38 @@ h1 {
         text-decoration: underline;
     }
   
-    table {
+table {
         margin: 5px;
         width: 290px;
     }
   
-    th {
+th {
         padding: 3px;
     }
   
-    td {
+td {
         padding-left: 8px;
         padding-right: 8px;
         border: 1px solid #990000;
         background-color: #ffffcc;
     }
 
-    #trHeader {
+#trHeader {
         text-decoration: underline;
         color: #990000;
     }
   
-    .centerCell {
+.centerCell {
         text-align: center;
     }
+
+.top1 {
+    background-color: #005ce6;
+}
+   
+/* Fa scomparire la scritta nel navbar */
+@media screen and (min-width: 576px) {
+  #nav-only-little {
+    display: none;
+  }
+}
