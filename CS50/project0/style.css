@@ -1,42 +1,60 @@
+/* Title with my name*/
 h1 {
-        text-align: center;
-        font-size: 12pt;
-        margin-bottom: 5px;
-        text-decoration: underline;
+    text-align: center;
+    margin-bottom: 5px;
+    text-decoration: bold;
+    color: white;
     }
-  
+
+
+/* Table setting */  
 table {
-        margin: 5px;
-        width: 290px;
+    margin: 5px;
+    width: 300px;
+    text-align: center;
     }
   
 th {
-        padding: 3px;
+    padding: 3px;
     }
   
 td {
-        padding-left: 8px;
-        padding-right: 8px;
-        border: 1px solid #990000;
-        background-color: #ffffcc;
-    }
-
-#trHeader {
-        text-decoration: underline;
-        color: #990000;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid #394047;
     }
   
-.centerCell {
-        text-align: center;
-    }
-
+/* main setting  */
 .top1 {
-    background-color: #005ce6;
+    background-color: #22262a;
 }
-   
-/* Fa scomparire la scritta nel navbar */
+
+.body {
+  background-color: #b9bfc6;
+  font-family: 'Amaranth';
+  color: #801a00;
+}
+
+/* Particular element setting */
+#firma{
+    text-align: right;
+    font-family: 'Allura';
+    font-size: 16pt;
+}
+
+
+
+/* Make navbar title disappear */
 @media screen and (min-width: 576px) {
   #nav-only-little {
     display: none;
   }
+  
+  table {
+    width: 576px;
+    }
 }
+
+
+
+

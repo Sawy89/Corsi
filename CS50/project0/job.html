@@ -4,19 +4,44 @@
         <title>Denny site</title>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="style2.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet'>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <div>
+    
+    <body class="body">
+        <!-- Top! -->
+        <div class="top1 text-light">
             <h1>Denny Terreno</h1>
-            <p>Working, always working....</p>
+            <p>Working, always working....so love your work!</p>
+            
+            <!-- Navbar with link to all pages -->
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+              <span class="navbar-brand" id="nav-only-little">Menu</span>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav mr-auto">
+                  <a class="nav-item nav-link" href="index.html">Home</a>
+                  <a class="nav-item nav-link" href="myself.html">My self</a>
+                  <a class="nav-item nav-link" href="study.html">Study</a>
+                  <a class="nav-item nav-link active" href="job.html">Job experience<span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="freetime.html">Free Time</a>
+                </div>
+              </div>
+            </nav>
+
         </div>
         
         <div class="row">
             
-            <div class="col-lg-3">
-                <h3>Sorin group - Biomedical Engineer</h3>
+            <div class="col-lg-4">
+                <h3>Sorin group<br>Biomedical Engineer</h3>
                 <p>
                     My first job experience after my degree started as a trainee in 2014 in a big biomedical multinational, on the Business Unit where pace-makers and ICD (implantable cardiac defribillator) were made.
                     I was lucky: the job was very close to my thesis experience, to my studies, I loved it!
@@ -28,8 +53,8 @@
                 </p>
             </div>
             
-            <div class="col-lg-3">
-                <h3>eVISO - Data Scientist & Energy Trader - Team Leader</h3>
+            <div class="col-lg-4">
+                <h3>eVISO<br>Data Scientist & Energy Trader<br>Team Leader</h3>
                 <p>
                     Eviso was a quite new startup quickly growing; it's an electricity supplier, and my job started in a 3 people team (but the 3rd is my boss, who is responsible also of the billing) in charge of forecasting and buying energy on the market for our client.
                     Now I'm the team leader of this team, that count other 3 other people than me, and we are also trying to reduce risk with financial covers, building report platform and helping the company with business analytics, taking care
@@ -40,7 +65,7 @@
                 </p>
             </div>
             
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <h3>Other things...</h3>
                 <p>
                     Yes, when I was studying I tried to earn some Euros by playing piano and accordion, teaching math and physics to high school students (I was lucky, they wanted to learn, and I loved to teach them),
@@ -51,8 +76,9 @@
             
         </div>
         
-        <div>
-            <a href="index.html">Home</a>
+        <!-- sign -->
+        <div id='firma'>
+            <p>Designed by Denny Terreno</p>
         </div>
     </body>
 </html>

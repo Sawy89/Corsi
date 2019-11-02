@@ -1,5 +1,47 @@
-$titlecolor: #000099;
+$margin: 25px;
 
-h1 {
-    color: $color;
+
+
+img {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $margin;
+}
+
+
+%main {
+    margin: $margin;
+}
+
+div p {
+    @extend %main;
+}
+
+
+div > h3 {
+    @extend %main;
+    text-align: left;
+}
+
+div > div > h3 {
+    @extend %main;
+    text-align: center;
+}
+
+
+.main {
+    @extend %main;
+}
+
+.row {
+    margin-bottom: $margin;
+}
+
+.top1 {
+    
+    p {
+        font-size: 14pt;
+    }
 }

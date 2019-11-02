@@ -1,0 +1,23 @@
+img {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px; }
+
+div p, div > h3, div > div > h3, .main {
+  margin: 25px; }
+
+div > h3 {
+  text-align: left; }
+
+div > div > h3 {
+  text-align: center; }
+
+.row {
+  margin-bottom: 25px; }
+
+.top1 p {
+  font-size: 14pt; }
+
+/*# sourceMappingURL=style2.css.map */
