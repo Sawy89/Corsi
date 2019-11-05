@@ -42,6 +42,14 @@ td {
     font-size: 16pt;
 }
 
+.col-sub{
+    text-decoration: underline;
+}
+
+.main-title, h3 {
+    color: #4d0000;
+}
+
 
 
 /* Make navbar title disappear */
@@ -57,12 +65,12 @@ td {
     }
 }
 
-.col-sub{
-    text-decoration: underline;
+@media screen and (max-width: 452px) {
+  table {
+    font-size: 12px;
+    }
 }
 
-.main-title, h3 {
-    color: #4d0000;
-}
+
 
 
