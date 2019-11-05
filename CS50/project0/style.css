@@ -65,7 +65,7 @@ td {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   table {
     font-size: 12px;
     }
