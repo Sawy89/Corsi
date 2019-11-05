@@ -49,12 +49,20 @@ td {
   #nav-only-little {
     display: none;
   }
-  
+}
+
+@media screen and (min-width: 650px) {
   table {
     width: 576px;
     }
 }
 
+.col-sub{
+    text-decoration: underline;
+}
 
+.main-title, h3 {
+    color: #4d0000;
+}
 
 
