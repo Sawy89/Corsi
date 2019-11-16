@@ -1,0 +1,10 @@
+# Folder
+__pycache__/
+flask_session
+
+# File Type
+*.csv
+*.db
+
+# Specific file
+goodreader.txt
