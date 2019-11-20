@@ -1,13 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov 16 15:51:32 2019
+Try to access goodread api
+Need a txt file with the key
+
+@author: Sawy89
+"""
+
+# %% Import
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_session import Session
 # from sqlalchemy.orm import scoped_session, sessionmaker
+
 from DBconnection import DBconnection
 
+from login import login_flask, loginRequired
+
+
+# %% MAIN
 app = Flask(__name__)
 
-# Check for environment variable
+# Blueprint
+app.register_blueprint(login_flask, url_prefix='/auth')
 
 
 # Configure session to use filesystem
@@ -19,6 +35,8 @@ Session(app)
 db = DBconnection()
 
 
+# %% Page
 @app.route("/")
+@loginRequired
 def index():
-    return "Project 1: TODO prova"
+    return render_template('index.html')

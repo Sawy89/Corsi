@@ -4,7 +4,7 @@ Created on Sat Nov 16 15:51:32 2019
 Try to access goodread api
 Need a txt file with the key
 
-@author: ddeen
+@author: Sawy89
 """
 
 # Read KEY
