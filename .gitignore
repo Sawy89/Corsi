@@ -9,3 +9,4 @@ flask_session
 # Specific file
 goodreader.txt
 config.txt
+config.bat

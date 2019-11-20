@@ -1,7 +1,10 @@
 '''
-Connection to DB:
+V1 Connection to DB:
 - Read a txt file containing info for connecting to DB
 - open the connection to DB
+
+V2 Connection to DB:
+- open connection to DB from ENV variable    
 
 Author: Sawy89
 '''
@@ -25,16 +28,26 @@ def readConfig():
 # %% DB connection
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import os
+db_version = 'v1'
 
 
 def DBconnection():
     '''
     Create a connection to DB
     '''
-    # Get config
-    d = readConfig()
+    if db_version == 'v1':
+        # Database through TXT file
+        d = readConfig()    # Get config
+        db_uri = d['DB_URI']
+
+    elif db_version == 'v2':
+        # Database through ENV variables
+        if not os.getenv("DATABASE_URL"):
+            raise RuntimeError("DATABASE_URL is not set")
+        db_uri = os.getenv("DATABASE_URL")
     
-    engine = create_engine(d['DB_URI'])
+    engine = create_engine(db_uri)
     db = scoped_session(sessionmaker(bind=engine))
     
     return db
