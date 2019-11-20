@@ -10,6 +10,7 @@ Login and Logout function
 from flask import Blueprint, request, session, flash, url_for, redirect, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+import datetime
 
 from DBconnection import DBconnection
 
@@ -29,7 +30,7 @@ def loginRequired(f):
     '''
     @wraps(f)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if 'user_id' in session:
             return f(*args, **kwargs)
         else:
             flash('You need to login first!')
@@ -56,7 +57,9 @@ def login():
         password = db.execute("SELECT password FROM users WHERE username = :username",
                               {'username':request.form['username']}).fetchone()
         if check_password_hash(password[0], request.form['password']):
-            session['logged_in'] = True
+            user_id = db.execute('SELECT user_id FROM users WHERE username = :username', 
+                              {'username':request.form['username']}).fetchone()
+            session['user_id'] = user_id[0]
         else:
             flash('wrong password!')
             return render_template('login.html')
@@ -66,11 +69,39 @@ def login():
     elif request.method == 'GET':
         return render_template('login.html')        # Login page
 
+
+@login_flask.route('/register', methods=['GET','POST'])
+def register():
+    '''
+    Register an account:
+        - POST: save new account on DB
+        - GET: insert data of the new account
+    '''
+    if request.method == 'POST':
+        # insert new account on DB
+        user_presence = db.execute('SELECT count(*) AS N FROM users WHERE username = :username', 
+                              {'username':request.form['username']}).fetchone()
+        if user_presence[0] == 0:
+            # Insert
+            adesso = datetime.datetime.now()
+            db.execute("INSERT INTO users (username, password, insertdate) VALUES (:username, :password, :adesso)",
+                    {"username": request.form['username'], "password": generate_password_hash(request.form['password']), "adesso": adesso})
+            db.commit()
+            flash('User '+request.form['username']+' correctly registered! Thank you!')
+        else:
+            flash('Username already registered; please chose another username!')
+            return render_template('register.html')
+     
+        return redirect(url_for('index'))
+    
+    elif request.method == 'GET':
+        return render_template('register.html')        # Register form
+
     
 @login_flask.route("/logout")
 def logout():
     '''
     Logout
     '''
-    session.pop('logged_in', None)
+    session.pop('user_id', None)
     return redirect(url_for('index'))               # return to index page

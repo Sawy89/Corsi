@@ -20,7 +20,7 @@
         </div>
         
         <!-- Logout -->
-        {% if session['logged_in'] == True %}
+        {% if 'user_id' in session %}
             <div class="container">
                 <a href={{ url_for('login_flask.logout') }}>Logout</a>
             </div>
