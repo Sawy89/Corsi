@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    RevBook search
+{% endblock %}
+
+{% block body %}
+    <h1>RevBook project!</h1>
+    <h2>Search for your favourite book...</h2>
+    
+    <!-- Search form -->
+    <div class="container">
+        <h3>Form</h3>
+
+        <form action="{{url_for('search')}}" method="POST">
+            <div class="form-group">
+                <input class="form-control" type="text" name="isbn" placeholder="ISBN" value='{{ '' if input_form==None else input_form['isbn'] }}'>
+                <input class="form-control" type="text" name="title" placeholder="Title" value='{{ '' if input_form==None else input_form['title'] }}'>
+                <input class="form-control" type="text" name="author" placeholder="Author" value='{{ '' if input_form==None else input_form['author'] }}'>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+    {% if books != None and books %}
+        <!-- Result -->
+        <div class="container">
+            <h3>Results</h3>
+
+            <table>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                    </tr>
+
+                    {% for book in books %}
+                    <tr>
+                        <td>{{book.isbn}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.year}}</td>
+                    </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    
+    {% else %}
+        <div class="container">
+            <h3>Try again...</h3>
+            <p>I'm sorry, but there are no books in the database for the filter you chose.</p>
+        </div>
+
+    {% endif %}
+
+
+{% endblock %}
