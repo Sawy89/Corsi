@@ -40,8 +40,8 @@
 
                     {% for book in books %}
                     <tr>
-                        <td>{{book.isbn}}</td>
-                        <td>{{book.title}}</td>
+                        <td><a href={{ url_for('book', book_id=book.book_id) }}>{{book.isbn}}</a></td>
+                        <td><a href={{ url_for('book', book_id=book.book_id) }}>{{book.title}}</a></td>
                         <td>{{book.author}}</td>
                         <td>{{book.year}}</td>
                     </tr>
@@ -49,7 +49,7 @@
             </table>
         </div>
     
-    {% else %}
+    {% elif books != None %}
         <div class="container">
             <h3>Try again...</h3>
             <p>I'm sorry, but there are no books in the database for the filter you chose.</p>

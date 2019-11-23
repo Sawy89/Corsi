@@ -8,12 +8,12 @@ Need a txt file with the key
 """
 
 # %% Import
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_session import Session
+import datetime
 # from sqlalchemy.orm import scoped_session, sessionmaker
 
 from DBconnection import DBconnection
-
 from login import login_flask, loginRequired
 
 
@@ -62,3 +62,69 @@ def search():
         input_form = None
 
     return render_template('search.html', books=books, input_form=input_form)
+
+
+@app.route("/books/<int:book_id>")
+@loginRequired
+def book(book_id):
+    '''
+    display a specific book with all his information
+    '''
+
+    # Make sure the book exists.
+    book = db.execute("SELECT * FROM books WHERE book_id = :id", {"id": book_id}).fetchone()
+    if book is None:
+        flash("The book selected doesn't exist")
+        return render_template("index.html")
+
+    # Get all review.
+    reviews = db.execute("SELECT * FROM reviews JOIN users ON reviews.user_id = users.user_id "
+                            " WHERE book_id = :book_id",
+                            {"book_id": book_id}).fetchall()
+    
+    # Add review only if there are no review from the user
+    # add_review = False if session['user_id'] in [review.user_id for review in reviews] else True
+    if session['user_id'] in [review.user_id for review in reviews]:
+        add_review = False
+    else:
+        add_review = True
+
+    return render_template("book.html", book=book, reviews=reviews, add_review=add_review)
+
+
+@app.route("/books/insert", methods=['POST'])
+@loginRequired
+def review_insert():
+    '''
+    Insert a new review on database
+    '''
+    # Get form information.
+    opinion = request.form.get("opinion")
+    try:
+        rating = int(request.form.get("rating"))
+    except ValueError:
+        flash('Invalid rating inserted!')
+        return render_template("index.html")
+    try:
+        book_id = int(request.form.get("book_id"))
+    except ValueError:
+        flash('Invalid book_id!')
+        return render_template("index.html")
+    adesso = datetime.datetime.now()
+    user_id = session['user_id']
+    
+    # Make sure the book exists.
+    book = db.execute("SELECT * FROM books WHERE book_id = :id", {"id": book_id}).fetchone()
+    if book is None:
+        flash("The book selected doesn't exist")
+        return render_template("index.html")
+    
+    # Insert the review
+    db.execute("INSERT INTO reviews (rating, opinion, book_id, user_id, insertdate) VALUES (:rating, :opinion, :book_id, :user_id, :insertdate)",
+            {"rating": rating, "opinion": opinion, "book_id": book_id, "user_id": user_id, "insertdate": adesso})
+    db.commit()
+
+    flash("Review inserted with success!")
+    return redirect(url_for('book', book_id=book_id))
+
+
