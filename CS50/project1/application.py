@@ -8,8 +8,6 @@ Need a txt file with the key
 """
 
 # %% Import
-import os
-
 from flask import Flask, render_template
 from flask_session import Session
 # from sqlalchemy.orm import scoped_session, sessionmaker
