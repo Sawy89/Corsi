@@ -13,7 +13,7 @@ from flask_session import Session
 import datetime
 # from sqlalchemy.orm import scoped_session, sessionmaker
 
-from DBconnection import DBconnection
+from DBconnection import DBconnection, APIgoodreader_getreview
 from login import login_flask, loginRequired
 
 
@@ -82,6 +82,9 @@ def book(book_id):
                             " WHERE book_id = :book_id",
                             {"book_id": book_id}).fetchall()
     
+    # Get data from GoodReader!
+    grapi = APIgoodreader_getreview(book.isbn)
+    
     # Add review only if there are no review from the user
     # add_review = False if session['user_id'] in [review.user_id for review in reviews] else True
     if session['user_id'] in [review.user_id for review in reviews]:
@@ -89,7 +92,7 @@ def book(book_id):
     else:
         add_review = True
 
-    return render_template("book.html", book=book, reviews=reviews, add_review=add_review)
+    return render_template("book.html", book=book, reviews=reviews, add_review=add_review, grapi=grapi)
 
 
 @app.route("/books/insert", methods=['POST'])

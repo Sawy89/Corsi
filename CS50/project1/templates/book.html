@@ -31,6 +31,17 @@
         </table>
     </div>
 
+    <!-- Book review from GoodReads -->
+    <div class="container">
+        <h3>GoodReads review!</h3>
+        {% if grapi['goodstatus'] %}
+        <p>On Goodreads.com there are <strong>{{grapi['work_ratings_count']}}</strong> ratings for this book;</p>
+        <p>The average rating is <strong>{{grapi['average_rating']}}</strong>.</p>
+        {% else %}
+            <p>{{grapi['message']}}</p>
+        {% endif %}
+    </div>
+
     <!-- Book review-->
     <div class="container">
         <h3>Book review:</h3>

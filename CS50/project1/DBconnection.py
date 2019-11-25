@@ -53,6 +53,46 @@ def DBconnection():
     return db
 
 
+# %% GoodReader API
+import requests
+
+def APIgoodreader_getreview(isbn):
+    '''
+    Create the connection with GoodReader API
+    Get the list of books with review asked with 'isbn' input
+    '''
+    if db_version == 'v1':
+        # API key through TXT file
+        d = readConfig()    # Get config
+        api_key = d['GOODREADER_API_KEY']
+
+    elif db_version == 'v2':
+        # Database through ENV variables
+        if not os.getenv("GOODREADER_API_KEY"):
+            raise RuntimeError("GOODREADER_API_KEY is not set")
+        api_key = os.getenv("GOODREADER_API_KEY")
+
+    # Get book data
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", 
+        params={"key": api_key, "isbns": isbn.replace(' ','')})
+    out = {}
+    if res.status_code == 404:
+        out['goodstatus'] = False
+        out['message'] = 'Book not found on GoodReader!'
+    else:
+        data = res.json()['books']
+        if len(data) == 1:
+            out['goodstatus'] = True
+            out['work_ratings_count'] = data[0]['work_ratings_count']
+            out['average_rating'] = data[0]['average_rating']
+        else:
+            out['goodstatus'] = False
+            out['message'] = 'Too many ()'+str(len(data))+') books found!'
+    
+    return out
+
+
+
 
 # %% Main
 if __name__ == "__main__":
