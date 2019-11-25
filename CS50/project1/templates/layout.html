@@ -6,6 +6,24 @@
     </head>
     
     <body>
+        <!-- NavBar -->
+        {% if 'user_id' in session %}
+        <!-- Navbar with link to all pages excepts Login -->
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <span class="navbar-brand" id="nav-only-little">Menu</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href={{ url_for('index') }}>Home</a>
+                <a class="nav-item nav-link" href={{ url_for('search') }}>Search Book</a>
+                <a class="nav-item nav-link" href={{ url_for('login_flask.logout') }}>Logout</a>
+              </div>
+            </div>
+        </nav>
+        {% endif %}
+        
         <!-- Flash messages -->
         <div class='flash container'>
             {% with messages = get_flashed_messages() %}
@@ -18,13 +36,7 @@
                 {% endif %}
             {% endwith %}
         </div>
-        
-        <!-- Logout -->
-        {% if 'user_id' in session %}
-            <div class="container">
-                <a href={{ url_for('login_flask.logout') }}>Logout</a>
-            </div>
-        {% endif %}
+                
         
         <div class="container">
             {% block body %}

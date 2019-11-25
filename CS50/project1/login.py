@@ -92,7 +92,7 @@ def register():
             flash('Username already registered; please chose another username!')
             return render_template('register.html')
      
-        return redirect(url_for('index'))
+        return redirect(url_for('login_flask.login'))
     
     elif request.method == 'GET':
         return render_template('register.html')        # Register form
