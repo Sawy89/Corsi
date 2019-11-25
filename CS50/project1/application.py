@@ -95,6 +95,7 @@ def book(book_id):
 
 
 @app.route("/api/<isbn>")
+@loginRequired
 def api(isbn):
     '''
     API for getting book data
