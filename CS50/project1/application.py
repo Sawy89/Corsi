@@ -8,10 +8,9 @@ Need a txt file with the key
 """
 
 # %% Import
-from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify, abort
 from flask_session import Session
 import datetime
-# from sqlalchemy.orm import scoped_session, sessionmaker
 
 from DBconnection import DBconnection, APIgoodreader_getreview
 from login import login_flask, loginRequired
@@ -93,6 +92,35 @@ def book(book_id):
         add_review = True
 
     return render_template("book.html", book=book, reviews=reviews, add_review=add_review, grapi=grapi)
+
+
+@app.route("/api/<isbn>")
+def api(isbn):
+    '''
+    API for getting book data
+    '''
+
+    # Make sure the book exists.
+    book = db.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn": isbn}).fetchone()
+    if book is None:
+        abort(404)
+
+    # Get all review.
+    reviews = db.execute("SELECT count(*) AS n_review "
+                            " , avg(rating) AS avg_rating "
+                            " FROM reviews "
+                            " WHERE book_id = :book_id ",
+                            {"book_id": book.book_id}).fetchone()
+    
+    # Get data from GoodReader!
+    grapi = APIgoodreader_getreview(book.isbn)
+
+    # creo dizionario
+    diz_json = {"title": book.title, "author": book.author, "year": book.year, 
+            "isbn": book.isbn, "review_count": reviews.n_review, "average_score": reviews.avg_rating,
+            "goodread_review_count": grapi['work_ratings_count'], "goodread_average_score": grapi['average_rating']}
+
+    return jsonify(diz_json)
 
 
 @app.route("/books/insert", methods=['POST'])
