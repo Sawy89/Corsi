@@ -3,6 +3,7 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link href={{url_for('static', filename='style.css')}} rel="stylesheet" type="text/css">
     </head>
     
     <body>
@@ -25,20 +26,22 @@
         {% endif %}
         
         <!-- Flash messages -->
-        <div class='flash container'>
+        <div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
+                <div class="row alert alert-warning" role="alert">
                     <ul>
                     {% for message in messages %}
                         <li> <strong> {{ message }} </strong> </li>
                     {% endfor %}
                     </ul>
+                </div>
                 {% endif %}
             {% endwith %}
         </div>
                 
         
-        <div class="container">
+        <div class="container bodyblock">
             {% block body %}
             {% endblock %}
         </div>

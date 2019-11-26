@@ -8,42 +8,43 @@
     <h1>Here is your book!</h1>
 
     <!-- Book detail-->
-    <div class="container">
+    <div class="container bodyblock">
         <h3>Book detail:</h3>
 
         <table>
             <tr>
-                <td>ISBN</td>
+                <th>ISBN</th>
                 <td>{{book.isbn}}</td>
             </tr>
             <tr>
-                <td>Title</td>
+                <th>Title</th>
                 <td>{{book.title}}</td>
             </tr>
             <tr>
-                <td>Author</td>
+                <th>Author</th>
                 <td>{{book.author}}</td>
             </tr>
             <tr>
-                <td>Year</td>
+                <th>Year</th>
                 <td>{{book.year}}</td>
             </tr>
         </table>
     </div>
 
     <!-- Book review from GoodReads -->
-    <div class="container">
+    <div class="container bodyblock">
         <h3>GoodReads review!</h3>
         {% if grapi['goodstatus'] %}
-        <p>On Goodreads.com there are <strong>{{grapi['work_ratings_count']}}</strong> ratings for this book;</p>
-        <p>The average rating is <strong>{{grapi['average_rating']}}</strong>.</p>
+            <p>On Goodreads.com there are <strong>{{grapi['work_ratings_count']}}</strong> ratings for this book;<br>
+                The average rating is <strong>{{grapi['average_rating']}}</strong>.
+            </p>
         {% else %}
             <p>{{grapi['message']}}</p>
         {% endif %}
     </div>
 
     <!-- Book review-->
-    <div class="container">
+    <div class="container bodyblock">
         <h3>Book review:</h3>
 
         {% if reviews %}
@@ -75,15 +76,15 @@
         <!-- Add your review -->
         {% if add_review == True %}
             <p>Insert your review:</p>
-            <form action="{{url_for('review_insert')}}" method="POST">
-                <div class="form-group">
-                    <input class="form-control" type="number" min="1" max="5" name="rating" placeholder="Rating" required>
-                    <input class="form-control" type="text" name="opinion" placeholder="Opinion" required>
-                    <input class="form-control" type="hidden" name="book_id" value="{{book.book_id}}">
+            <form class="form-signin" action="{{url_for('review_insert')}}" method="POST">
+                <div class="form-label-group">
+                    <input class="form-control form-space" type="number" min="1" max="5" name="rating" placeholder="Rating" required>
+                    <input class="form-control form-space" type="text" name="opinion" placeholder="Opinion" required>
+                    <input type="hidden" name="book_id" value="{{book.book_id}}">
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-primary">Insert</button>
+                    <button class="btn btn-lg btn-primary text-uppercase">Insert</button>
                 </div>
             </form>
         {% endif %}
