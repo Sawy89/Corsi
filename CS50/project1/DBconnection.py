@@ -1,4 +1,6 @@
 '''
+Connection to Database and API for accessing GoodReads review
+
 V1 Connection to DB:
 - Read a txt file containing info for connecting to DB
 - open the connection to DB

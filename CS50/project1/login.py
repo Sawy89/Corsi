@@ -3,7 +3,7 @@
 Created on Mon Jan 21 20:05:07 2019
 Login and Logout function
 
-@author: ddeen
+@author: Sawy89
 """
 
 # %% import

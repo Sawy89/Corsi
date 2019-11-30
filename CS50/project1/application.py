@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Nov 16 15:51:32 2019
-Try to access goodread api
-Need a txt file with the key
+
+Main of the FLASK application fo book review site:
+- register, login and logout
+- search for book in the database by Title, ISBN, author
+- visualize some info on selected book, visualize review, add review
+- access some info through API
 
 @author: Sawy89
 """
@@ -108,7 +112,7 @@ def api(isbn):
 
     # Get all review.
     reviews = db.execute("SELECT count(*) AS n_review "
-                            " , avg(rating) AS avg_rating "
+                            " , round(avg(rating),2) AS avg_rating "
                             " FROM reviews "
                             " WHERE book_id = :book_id ",
                             {"book_id": book.book_id}).fetchone()
@@ -118,7 +122,7 @@ def api(isbn):
 
     # creo dizionario
     diz_json = {"title": book.title, "author": book.author, "year": book.year, 
-            "isbn": book.isbn, "review_count": reviews.n_review, "average_score": reviews.avg_rating,
+            "isbn": book.isbn, "review_count": reviews.n_review, "average_score": str(reviews.avg_rating),
             "goodread_review_count": grapi['work_ratings_count'], "goodread_average_score": grapi['average_rating']}
 
     return jsonify(diz_json)
