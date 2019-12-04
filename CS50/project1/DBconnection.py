@@ -78,10 +78,7 @@ def APIgoodreader_getreview(isbn):
     res = requests.get("https://www.goodreads.com/book/review_counts.json", 
         params={"key": api_key, "isbns": isbn.replace(' ','')})
     out = {}
-    if res.status_code == 404:
-        out['goodstatus'] = False
-        out['message'] = 'Book not found on GoodReader!'
-    else:
+    if res.status_code == 200:
         data = res.json()['books']
         if len(data) == 1:
             out['goodstatus'] = True
@@ -90,7 +87,13 @@ def APIgoodreader_getreview(isbn):
         else:
             out['goodstatus'] = False
             out['message'] = 'Too many ()'+str(len(data))+') books found!'
-    
+    elif res.status_code == 404:
+        out['goodstatus'] = False
+        out['message'] = 'Book not found on GoodReader!'
+    else:
+        out['goodstatus'] = False
+        out['message'] = 'Error message '+str(res.status_code)
+       
     return out
 
 

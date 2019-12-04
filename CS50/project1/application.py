@@ -99,7 +99,6 @@ def book(book_id):
 
 
 @app.route("/api/<isbn>")
-@loginRequired
 def api(isbn):
     '''
     API for getting book data
@@ -108,7 +107,7 @@ def api(isbn):
     # Make sure the book exists.
     book = db.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn": isbn}).fetchone()
     if book is None:
-        abort(404)
+        return jsonify({"error": "ISBN not found"}), 404
 
     # Get all review.
     reviews = db.execute("SELECT count(*) AS n_review "
