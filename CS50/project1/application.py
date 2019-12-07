@@ -18,6 +18,9 @@ import datetime
 
 from DBconnection import DBconnection, APIgoodreader_getreview
 from login import login_flask, loginRequired
+from models import *
+from sqlalchemy import and_
+from sqlalchemy.sql import func
 
 
 # %% MAIN
@@ -30,10 +33,12 @@ app.register_blueprint(login_flask, url_prefix='/auth')
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["SQLALCHEMY_DATABASE_URI"] = DBconnection(get_uri=True)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 Session(app)
 
-# Set up database
-db = DBconnection()
+# Link the Flask app with the database (no Flask app is actually being run yet).
+db.init_app(app)
 
 
 # %% Page
@@ -55,10 +60,9 @@ def search():
     '''
     if request.method == 'POST':
         # Query with input: download books
-        books = db.execute("SELECT * FROM books WHERE LOWER(isbn) LIKE :isbn AND LOWER(title) LIKE :title AND LOWER(author) LIKE :author",
-                              {'isbn':'%'+(request.form['isbn']).lower()+'%', 
-                              'title':'%'+(request.form['title']).lower()+'%',
-                              'author':'%'+(request.form['author']).lower()+'%'}).fetchall()
+        books = Book.query.filter(and_(Book.isbn.ilike("%"+request.form['isbn']+"%"), 
+                                        Book.title.ilike("%"+request.form['title']+"%"),
+                                        Book.author.ilike("%"+request.form['author']+"%"))).all()
         input_form = request.form
     else:
         books = None
@@ -75,15 +79,13 @@ def book(book_id):
     '''
 
     # Make sure the book exists.
-    book = db.execute("SELECT * FROM books WHERE book_id = :id", {"id": book_id}).fetchone()
+    book = Book.query.filter_by(book_id=book_id).first()
     if book is None:
         flash("The book selected doesn't exist")
         return render_template("index.html")
 
     # Get all review.
-    reviews = db.execute("SELECT * FROM reviews JOIN users ON reviews.user_id = users.user_id "
-                            " WHERE book_id = :book_id",
-                            {"book_id": book_id}).fetchall()
+    reviews = Review.query.filter_by(book_id=book_id).all()
     
     # Get data from GoodReader!
     grapi = APIgoodreader_getreview(book.isbn)
@@ -105,16 +107,13 @@ def api(isbn):
     '''
 
     # Make sure the book exists.
-    book = db.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn": isbn}).fetchone()
+    book = Book.query.filter_by(isbn=isbn).first()
     if book is None:
         return jsonify({"error": "ISBN not found"}), 404
 
     # Get all review.
-    reviews = db.execute("SELECT count(*) AS n_review "
-                            " , round(avg(rating),2) AS avg_rating "
-                            " FROM reviews "
-                            " WHERE book_id = :book_id ",
-                            {"book_id": book.book_id}).fetchone()
+    reviews = Review.query.with_entities(func.count(Review.rating).label('n_review'),
+                                func.avg(Review.rating).label('avg_rating')).filter_by(book_id=book.book_id).first()
     
     # Get data from GoodReader!
     grapi = APIgoodreader_getreview(book.isbn)
@@ -149,15 +148,16 @@ def review_insert():
     user_id = session['user_id']
     
     # Make sure the book exists.
-    book = db.execute("SELECT * FROM books WHERE book_id = :id", {"id": book_id}).fetchone()
+    book = Book.query.filter_by(book_id=book_id).first()
     if book is None:
         flash("The book selected doesn't exist")
         return render_template("index.html")
     
     # Insert the review
-    db.execute("INSERT INTO reviews (rating, opinion, book_id, user_id, insertdate) VALUES (:rating, :opinion, :book_id, :user_id, :insertdate)",
-            {"rating": rating, "opinion": opinion, "book_id": book_id, "user_id": user_id, "insertdate": adesso})
-    db.commit()
+    review = Review(rating=rating, opinion=opinion, book_id=book_id,
+                        user_id=user_id, insertdate=adesso)
+    db.session.add(review)
+    db.session.commit()
 
     flash("Review inserted with success!")
     return redirect(url_for('book', book_id=book_id))

@@ -34,7 +34,7 @@ import os
 db_version = 'v2'
 
 
-def DBconnection():
+def DBconnection(get_uri=False):
     '''
     Create a connection to DB
     '''
@@ -49,10 +49,12 @@ def DBconnection():
             raise RuntimeError("DATABASE_URL is not set")
         db_uri = os.getenv("DATABASE_URL")
     
-    engine = create_engine(db_uri)
-    db = scoped_session(sessionmaker(bind=engine))
-    
-    return db
+    if get_uri == False:
+        engine = create_engine(db_uri)
+        db = scoped_session(sessionmaker(bind=engine))
+        return db
+    else:
+        return db_uri
 
 
 # %% GoodReader API
