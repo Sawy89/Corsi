@@ -15,6 +15,7 @@ Main of the FLASK application fo book review site:
 from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify, abort
 from flask_session import Session
 import datetime
+from werkzeug.security import check_password_hash
 
 from DBconnection import DBconnection, APIgoodreader_getreview
 from login import login_flask, loginRequired
@@ -103,8 +104,21 @@ def book(book_id):
 @app.route("/api/<isbn>")
 def api(isbn):
     '''
-    API for getting book data
+    API for getting book data;
+    Need to pass as parameters:
+    - username
+    - password
+    --> Are used the same users of the website!
     '''
+    # Check username existence
+    user_presence = User.query.filter_by(username=request.args['username']).count()
+    if user_presence == 0:
+        return jsonify({"error": "Wrong username"}), 404
+    
+    # Check password
+    password = User.query.with_entities(User.password).filter_by(username=request.args['username']).first()
+    if check_password_hash(password[0], request.args['password'])==False:
+        return jsonify({"error": "Wrong password"}), 404
 
     # Make sure the book exists.
     book = Book.query.filter_by(isbn=isbn).first()

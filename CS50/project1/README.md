@@ -36,3 +36,5 @@ The project is made by the following script file:
 - All html file in template folder
 
 --> Upgraded for using flask_sqlalchemy as ORM for connecting to DB!
+
+For using the API, need to pass "username" and "password" as parameters
