@@ -34,3 +34,5 @@ The project is made by the following script file:
 - ```application.py``` with all other needed function for the project
 - ```import.py``` and ```create_schema.sql``` for creating the Database schema and importing ```book.csv``` data in it; you only need to run ```import.py``` file to do it
 - All html file in template folder
+
+--> Upgraded for using flask_sqlalchemy as ORM for connecting to DB!
