@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Security.Cryptography;
+using Konscious.Security.Cryptography;
+using System.Text;
+
 
 namespace prova_cs
 {
@@ -96,6 +100,39 @@ namespace prova_cs
             this.Amount = amount;
             this.Date = date;
             this.Notes = note;
+        }
+    }
+
+    public static class HashPass
+    /*
+    * Argon 2 function for hashing password
+    https://www.twelve21.io/how-to-use-argon2-for-password-hashing-in-csharp/
+    */ 
+    {
+        private readonly static RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+
+        private static byte[] createSalt() {
+            var buffer = new byte[16];
+            rng.GetBytes(buffer);
+            return buffer;
+        }
+
+        private static byte[] hashInternal(string password, byte[] salt) {
+            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
+
+            argon2.Salt = salt;
+            argon2.DegreeOfParallelism = 2;
+            argon2.Iterations = 4;
+            argon2.MemorySize = 1024;
+
+            return argon2.GetBytes(16);
+        }
+
+        public static string hash(string password) {
+            var salt = createSalt();
+            var hash = hashInternal(password, salt);
+
+            return Convert.ToBase64String(hash) + ";" + Convert.ToBase64String(salt);
         }
     }
 }

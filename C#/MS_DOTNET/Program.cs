@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace prova_cs
 {
     class Program
@@ -20,7 +21,10 @@ namespace prova_cs
             // Program.ListAndIndex();
 
             // Prova Banca
-            Program.BankMain();
+            // Program.BankMain();
+
+            // Prova Pedro
+            Program.provaPassoword();
         }
 
         public static void Stringhe()
@@ -167,5 +171,13 @@ namespace prova_cs
             }
         }
 
+        public static void provaPassoword()
+        {
+            // prova a creare l'hash di una password
+            var password = "mettiquilatuapassword";
+            var passwordHased = HashPass.hash(password);
+            System.Console.WriteLine(passwordHased);
+        }
     }
+
 }
