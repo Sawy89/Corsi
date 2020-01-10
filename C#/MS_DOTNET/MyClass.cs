@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using Konscious.Security.Cryptography;
-using System.Text;
 
 
 namespace prova_cs
@@ -133,6 +132,19 @@ namespace prova_cs
             var hash = hashInternal(password, salt);
 
             return Convert.ToBase64String(hash) + ";" + Convert.ToBase64String(salt);
+        }
+    }
+
+    public class DoubleCostructor
+    /*
+    * Try to build a class with 2 costructor
+    */
+    {
+        public DoubleCostructor(string s1) : this(s1, "automatic") {}
+        
+        public DoubleCostructor(string s1, string s2)
+        {
+            System.Console.WriteLine($"Here is the concatenation: {s1} - {s2}");
         }
     }
 }

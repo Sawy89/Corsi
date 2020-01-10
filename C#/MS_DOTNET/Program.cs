@@ -23,8 +23,12 @@ namespace prova_cs
             // Prova Banca
             // Program.BankMain();
 
-            // Prova Pedro
-            Program.provaPassoword();
+            // Prova Hash
+            // Program.provaPassword();
+            
+            // Prova Double Costructor
+            Program.provaDoubleConstructor();
+
         }
 
         public static void Stringhe()
@@ -171,12 +175,18 @@ namespace prova_cs
             }
         }
 
-        public static void provaPassoword()
+        public static void provaPassword()
         {
             // prova a creare l'hash di una password
             var password = "mettiquilatuapassword";
             var passwordHased = HashPass.hash(password);
             System.Console.WriteLine(passwordHased);
+        }
+
+        public static void provaDoubleConstructor()
+        {
+            var a = new DoubleCostructor("Prova con due input", "Ecco il secondo input");
+            var b = new DoubleCostructor("Prova con un solo input");
         }
     }
 
