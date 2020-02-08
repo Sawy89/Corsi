@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+        <script type=text/javascript>
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+        <title>Flack</title>
+    </head>
+    <body>
+        <div id="title">
+            <h1>Flack</h1>
+            <div id="disp-user-name"></div>
+        </div>
+
+        <div id="page">
+            <div id="lateral-menu">
+
+            </div>
+            <div id="messages">
+
+            </div>
+        </div>
+    </body>
+</html>
