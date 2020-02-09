@@ -4,7 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('user_name'))
         window.location.replace($SCRIPT_ROOT + "\login");
     else
-        document.querySelector('#disp-user-name').innerHTML = "Welcome " + localStorage.getItem('user_name');
+        user_name = localStorage.getItem('user_name');
+
+        // Create Get request
+        const request = new XMLHttpRequest();
+        request.open('GET', '/register/check/'+user_name);
+        request.send(true);
+
+        // Result of request
+        request.onload = () => {
+            const data = JSON.parse(request.responseText);
+            if (data.registered) {
+                // Update the result div
+                document.querySelector('#disp-user-name').innerHTML = "Welcome " + localStorage.getItem('user_name');   // already logged in!    
+            }
+            else {
+                // send to LOGIN
+                window.location.replace($SCRIPT_ROOT + "\login");
+            }
+        }
+
 });
 
 // document.addEventListener('DOMContentLoaded', () => {
