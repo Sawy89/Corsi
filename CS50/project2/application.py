@@ -9,7 +9,8 @@ socketio = SocketIO(app)
 
 
 # %% Variables
-users_name = []  # for storing registered user
+usernames = []  # for storing registered user
+channels = []
 
 
 # %% Pages
@@ -24,12 +25,12 @@ def login():
 
 
 # %% API
-@app.route("/register/check/<user_name>", methods=['GET'])
-def register_check(user_name):
+@app.route("/register/check/<username>", methods=['GET'])
+def register_check(username):
     '''
     Check if the requested user was already logged;
     '''
-    already_registered = True if user_name in users_name else False
+    already_registered = True if username in usernames else False
     return jsonify({"registered": already_registered}), 200
 
 
@@ -39,19 +40,18 @@ def register_new():
     Check if the requested user was already logged;
      if not, it saves it!
     '''
-    if request.json and 'user_name' in request.json and 'already_registered' in request.json:
-        user_name = request.json['user_name']
+    if request.json and 'username' in request.json and 'already_registered' in request.json:
+        username = request.json['username']
         already_registered = request.json['already_registered']
     else:
-        print(request.json)
         return jsonify({"registered": False, "error": "Method not supported"}), 405
     
-    if already_registered == True and user_name in users_name:
+    if already_registered == True and username in usernames:
         return jsonify({"registered": True}), 200
-    elif already_registered == False and user_name in users_name:
+    elif already_registered == False and username in usernames:
         return jsonify({"registered": False, "error": "Username already used"}), 409
     else:
-        users_name.append(user_name)
+        usernames.append(username)
         return jsonify({"registered": True}), 200
 
 

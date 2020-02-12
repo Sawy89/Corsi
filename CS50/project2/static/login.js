@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // At the click of the button, save the name and redirect to index
     document.querySelector('button').onclick = () => {
         // Get the name and save it
-        const user_name = document.querySelector('#form-name').value;
+        const username = document.querySelector('#form-name').value;
 
         // Register with BACKEND
         const request = new XMLHttpRequest();
@@ -30,18 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update the result div
             if (data.registered) {
                 // save on frontend
-                localStorage.setItem('user_name', user_name);
+                localStorage.setItem('username', username);
                 // Send to index
-                window.location.href = $SCRIPT_ROOT;
+                window.location.href = "/";
             }
             else {
-                alert("The username " + user_name + " is already used! Try another one!");
+                alert("The username " + username + " is already used! Try another one!");
             }
                 
         }
         
         // Register with BACKEND: lauch
-        var data = JSON.stringify({'user_name': user_name, "already_registered": false});
+        var data = JSON.stringify({'username': username, "already_registered": false});
         request.send(data);
 
     };

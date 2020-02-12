@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Check if already registered
-    if (!localStorage.getItem('user_name'))
+    if (!localStorage.getItem('username'))
         window.location.replace($SCRIPT_ROOT + "\login");
     else
-        user_name = localStorage.getItem('user_name');
+        username = localStorage.getItem('username');
 
         // Create Get request
         const request = new XMLHttpRequest();
-        request.open('GET', '/register/check/'+user_name);
+        request.open('GET', '/register/check/'+username);
         request.send(true);
 
         // Result of request
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(request.responseText);
             if (data.registered) {
                 // Update the result div
-                document.querySelector('#disp-user-name').innerHTML = "Welcome " + localStorage.getItem('user_name');   // already logged in!    
+                document.querySelector('#disp-username').innerHTML = "Welcome " + localStorage.getItem('username');   // already logged in!    
             }
             else {
                 // send to LOGIN
