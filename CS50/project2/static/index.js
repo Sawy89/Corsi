@@ -1,7 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Check if already registered
+    // Login
+    loginCheck();
+
+    // New Channel
+    channelButton();
+    document.querySelector('#new-channel').onclick = function () {
+        newChannelClicked ();
+    };
+
+});
+
+
+// LOGIN
+function loginCheck () {
     if (!localStorage.getItem('username'))
+        // Not yet registered: send to LOGIN page
         window.location.replace($SCRIPT_ROOT + "\login");
     else
         username = localStorage.getItem('username');
@@ -15,16 +29,55 @@ document.addEventListener('DOMContentLoaded', () => {
         request.onload = () => {
             const data = JSON.parse(request.responseText);
             if (data.registered) {
-                // Update the result div
-                document.querySelector('#disp-username').innerHTML = "Welcome " + localStorage.getItem('username');   // already logged in!    
+                // Already registered!
+                document.querySelector('#disp-username').innerHTML = "Welcome " + localStorage.getItem('username');
             }
             else {
-                // send to LOGIN
+                // Not yet registered: send to LOGIN page
                 window.location.replace($SCRIPT_ROOT + "\login");
             }
         }
+}
 
-});
+
+// NEW CHANNEL BUTTON
+function channelButton() {
+    // By default, submit button is disabled
+    document.querySelector('#new-channel').disabled = true;
+
+    // Enable button only if there is text in the input field
+    document.querySelector('input[name="new-channel"]').onkeyup = () => {
+        if (document.querySelector('input[name="new-channel"]').value.length > 0)
+            document.querySelector('#new-channel').disabled = false;
+        else
+            document.querySelector('#new-channel').disabled = true;
+    };
+};
+
+
+// NEW CHANNEL
+function dispNewChannel(channelName) {
+    // Create a new button with the cannel name and add it
+    const channel = document.createElement('button');
+    channel.classList.add("btn");
+    channel.classList.add("btn-secondary");
+    channel.innerHTML = channelName;
+    document.querySelector('#channel-list').append(channel)
+};
+
+
+function newChannelClicked () {
+    // display the new channel
+    dispNewChannel(document.querySelector('input[name="new-channel"]').value);
+
+    // empty the input text and disable button
+    document.querySelector('input[name="new-channel"]').value = '';
+    document.querySelector('#new-channel').disabled = true;
+};
+
+
+// ToDo: add active when clicked
+
 
 // document.addEventListener('DOMContentLoaded', () => {
 

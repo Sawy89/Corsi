@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var data = JSON.stringify({'username': username, "already_registered": false});
         request.send(data);
 
+        return false;
     };
 });
 
