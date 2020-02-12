@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // New Channel
     channelButton();
     document.querySelector('#new-channel').onclick = function () {
-        newChannelClicked ();
+        newChannelClicked();
     };
 
 });
@@ -28,14 +28,12 @@ function loginCheck () {
         // Result of request
         request.onload = () => {
             const data = JSON.parse(request.responseText);
-            if (data.registered) {
+            if (data.registered)
                 // Already registered!
                 document.querySelector('#disp-username').innerHTML = "Welcome " + localStorage.getItem('username');
-            }
-            else {
+            else
                 // Not yet registered: send to LOGIN page
                 window.location.replace($SCRIPT_ROOT + "\login");
-            }
         }
 }
 
@@ -56,6 +54,13 @@ function channelButton() {
 
 
 // NEW CHANNEL
+// Connect to websocket
+var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+// Display new channel if the server emit!
+socket.on('new channel', data => {
+    dispNewChannel(data);
+});
+
 function dispNewChannel(channelName) {
     // Create a new button with the cannel name and add it
     const channel = document.createElement('button');
@@ -67,16 +72,31 @@ function dispNewChannel(channelName) {
 
 
 function newChannelClicked () {
-    // display the new channel
-    dispNewChannel(document.querySelector('input[name="new-channel"]').value);
+    // get the channel name (input) and send it back to server
+    const channel = document.querySelector('input[name="new-channel"]').value;
+    const request = new XMLHttpRequest();
+    request.open('GET', '/channel/new/'+channel);
+    request.send(true);
+
+    // Result of request
+    request.onload = () => {
+        const data = JSON.parse(request.responseText);
+        if (data.already_present)
+            alert("Channel "+channel+" already present! Try another name!");
+        else
+            alert("Channel "+channel+" created!");
+    };
 
     // empty the input text and disable button
     document.querySelector('input[name="new-channel"]').value = '';
-    document.querySelector('#new-channel').disabled = true;
+    document.querySelector('#new-channel').disabled = true;    
 };
 
 
-// ToDo: add active when clicked
+
+// ToDo: add active when clicked the channel
+
+// ToDo: add all channel when loading
 
 
 // document.addEventListener('DOMContentLoaded', () => {

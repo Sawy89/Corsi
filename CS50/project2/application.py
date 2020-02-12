@@ -55,4 +55,27 @@ def register_new():
         return jsonify({"registered": True}), 200
 
 
+@app.route("/channel/new/<channel>", methods=['GET'])
+def channel_new(channel):
+    '''
+    Check if a channel exist: 
+    - if yes, return an error, 
+    - otherwise create it and EMIT all channel
+    '''
+    print(channels)
+    is_new = False if channel in channels else True
+    if is_new == False:
+        return jsonify({"already_present": True}), 200
+    else:
+        channels.append(channel)
+        socketio.emit("new channel", channel, broadcast=True)
+        return jsonify({"c": False}), 200
+
+
+@app.route("/channel/getall", methods=['GET'])
+def channel_all():
+    '''
+    Return the channels list
+    '''
+    return jsonify({"channels": channels}), 200
 
