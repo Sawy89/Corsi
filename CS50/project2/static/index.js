@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load all channel
     allChannel();
+    channelManag();
 
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -47,6 +48,7 @@ function loginCheck () {
         }
 }
 
+
 // ALL CHANNEL
 function allChannel () {
     // Create Get request
@@ -63,6 +65,7 @@ function allChannel () {
             alert('Bad request!');
     };
 };
+
 
 // NEW CHANNEL BUTTON
 function channelButton() {
@@ -85,6 +88,7 @@ function dispNewChannel(channelName) {
     const channel = document.createElement('button');
     channel.classList.add("btn");
     channel.classList.add("btn-secondary");
+    channel.classList.add("channel-button");
     channel.innerHTML = channelName;
     document.querySelector('#channel-list').append(channel)
 };
@@ -111,9 +115,16 @@ function newChannelClicked () {
 };
 
 
+// CHANNEL SELECTED
+function channelManag () {
+    // extract all channels and add event listener for channel clicked
+    const channels = document.querySelectorAll('.channel-button');
+    channels.forEach((channel) => {
+        channel.addEventListener('click', () => {
+          console.log("forEach worked");
+        });
+    });
+};
 
 
-
-
-// ToDo: add active when clicked the channel
 
