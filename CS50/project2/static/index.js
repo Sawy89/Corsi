@@ -104,7 +104,7 @@ function dispNewChannel(channelName) {
     
     // Add event listener for click on the channel
     channel.addEventListener('click', () => {
-        channelSelected(channel.innerHTML);
+        channelSelected(channel);
     });
 };
 
@@ -134,26 +134,29 @@ function newChannelClicked () {
 
 // CHANNEL SELECTED: what happens when a channel is selected
 function channelSelected (channel) {
-    console.log('yeah: '+channel);
+    channelName = channel.innerHTML;
+    console.log('yeah: '+channel.inn);
     
-    // Display channel
-    document.querySelector('#channel-title').innerHTML = channel;
+    // Activate & Display channel
+    document.querySelectorAll('.channel-button').forEach(element => element.classList.remove('active'));
+    channel.classList.add('active');
+    document.querySelector('#channel-title').innerHTML = channelName;
 
     // Get channel data
     const request = new XMLHttpRequest();
-    request.open('GET', '/channel/'+channel+'/getmessages');
+    request.open('GET', '/channel/'+channelName+'/getmessages');
 
     // Result of request
     request.onload = () => {
         const data = JSON.parse(request.responseText);
-        if (request.status == 200 && channel == data['name']) {
+        if (request.status == 200 && channelName == data['name']) {
             document.querySelector('#channel-disp').innerHTML = '';
-            data['messages'].forEach(element => dispChannelMessage(element));
-            dispChannelMessagesInput(channel);
-            localStorage.setItem('currentChannel', channel);
+            data['messages'].forEach(element => dispChannelMessage(element)); // display all messages
+            dispChannelMessagesInput(channelName);
+            localStorage.setItem('currentChannel', channelName);
         }
         else
-            alert("Channel "+channel+" data not found!");
+            alert("Channel "+channelName+" data not found!");
     };
 
     request.send(true);
