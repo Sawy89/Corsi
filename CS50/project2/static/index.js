@@ -3,11 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Login
     loginCheck();
 
+    // Load all channel
+    allChannel();
+
+    // Connect to websocket
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
     // New Channel
     channelButton();
     document.querySelector('#new-channel').onclick = function () {
         newChannelClicked();
     };
+    // Display new channel if the server emit!
+    socket.on('new channel', data => {
+        dispNewChannel(data);
+    });
 
 });
 
@@ -37,6 +47,22 @@ function loginCheck () {
         }
 }
 
+// ALL CHANNEL
+function allChannel () {
+    // Create Get request
+    var request = new XMLHttpRequest();
+    request.open('GET', '/channel/getall');
+    request.send(true);
+
+    // Result of request
+    request.onload = () => {
+        const data = JSON.parse(request.responseText);
+        if (request.status == 200)
+            data.channels.forEach(element => dispNewChannel(element));
+        else
+            alert('Bad request!');
+    };
+};
 
 // NEW CHANNEL BUTTON
 function channelButton() {
@@ -54,13 +80,6 @@ function channelButton() {
 
 
 // NEW CHANNEL
-// Connect to websocket
-var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
-// Display new channel if the server emit!
-socket.on('new channel', data => {
-    dispNewChannel(data);
-});
-
 function dispNewChannel(channelName) {
     // Create a new button with the cannel name and add it
     const channel = document.createElement('button');
@@ -69,7 +88,6 @@ function dispNewChannel(channelName) {
     channel.innerHTML = channelName;
     document.querySelector('#channel-list').append(channel)
 };
-
 
 function newChannelClicked () {
     // get the channel name (input) and send it back to server
@@ -94,32 +112,8 @@ function newChannelClicked () {
 
 
 
+
+
+
 // ToDo: add active when clicked the channel
 
-// ToDo: add all channel when loading
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-
-//     // Connect to websocket
-//     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
-
-//     // When connected, configure buttons
-//     socket.on('connect', () => {
-
-//         // Each button should emit a "submit vote" event
-//         document.querySelectorAll('button').forEach(button => {
-//             button.onclick = () => {
-//                 const selection = button.dataset.vote;
-//                 socket.emit('submit vote', {'selection': selection});
-//             };
-//         });
-//     });
-
-//     // When a new vote is announced, add to the unordered list
-//     socket.on('vote totals', data => {
-//         document.querySelector('#yes').innerHTML = data.yes;
-//         document.querySelector('#no').innerHTML = data.no;
-//         document.querySelector('#maybe').innerHTML = data.maybe;
-//     });
-// });
