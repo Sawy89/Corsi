@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.registered) {
                 // save on frontend
                 localStorage.setItem('username', username);
+                // No channel saved
+                localStorage.setItem('currentChannel', '');
                 // Send to index
                 window.location.href = "/";
             }

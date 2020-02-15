@@ -60,8 +60,6 @@ function loginCheck () {
 
 // ALL CHANNEL: take all channels from server
 function allChannel () {
-    // No channel saved
-    localStorage.setItem('currentChannel', '');
     // Create Get request
     var request = new XMLHttpRequest();
     request.open('GET', '/channel/getall');
@@ -71,6 +69,7 @@ function allChannel () {
     request.onload = () => {
         const data = JSON.parse(request.responseText);
         if (request.status == 200) {
+            // Display all channels
             data.channels.forEach(element => dispNewChannel(element));
         }
         else
@@ -106,6 +105,10 @@ function dispNewChannel(channelName) {
     channel.addEventListener('click', () => {
         channelSelected(channel);
     });
+
+    // if saved, click the channel
+    if (localStorage.getItem('currentChannel') == channelName)
+        channel.click();
 };
 
 // NEW CHANNEL CLICK: action when the new channel button is clicked
@@ -228,3 +231,4 @@ function dispChannelMessagesInput (channel) {
 
 // ToDo: try to EMIT from server only to channels ?!?!
 // ToDo: alert message (for channel creation) temporary!
+// ToDO: work also with "Invio" and not only click
