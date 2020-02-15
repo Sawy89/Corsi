@@ -60,6 +60,8 @@ function loginCheck () {
 
 // ALL CHANNEL: take all channels from server
 function allChannel () {
+    // No channel saved
+    localStorage.setItem('currentChannel', '');
     // Create Get request
     var request = new XMLHttpRequest();
     request.open('GET', '/channel/getall');
@@ -197,4 +199,3 @@ function dispChannelMessagesInput (channel) {
 
 
 // ToDO: try to EMIT from server only to channels ?!?!
-// before this, check it's working well! I am not sure!!

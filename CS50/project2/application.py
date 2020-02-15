@@ -107,7 +107,8 @@ def new_message(data):
     '''
     # Extract data
     channel = data['channel']
-    new_message = {'message': data['message'], 
+    new_message = { 'channel': channel,
+                    'message': data['message'], 
                     'username': data['username'],
                     'insertdate': datetime.datetime.now().strftime('%d-%m-%y %H:%M:%S')}
 
