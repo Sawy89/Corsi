@@ -50,7 +50,7 @@ function loginCheck () {
             const data = JSON.parse(request.responseText);
             if (data.registered)
                 // Already registered!
-                document.querySelector('#disp-username').innerHTML = "Welcome " + localStorage.getItem('username');
+                document.querySelector('#disp-username').innerHTML = "Welcome <b>" + localStorage.getItem('username') + "</b>!";
             else
                 // Not yet registered: send to LOGIN page
                 window.location.replace($SCRIPT_ROOT + "\login");
@@ -98,9 +98,7 @@ function disableButton(buttonE, textE) {
 function dispNewChannel(channelName) {
     // Create a new button with the cannel name and add it
     const channel = document.createElement('button');
-    channel.classList.add("btn");
-    channel.classList.add("btn-secondary");
-    channel.classList.add("channel-button");
+    channel.classList.add("btn","btn-secondary","channel-button","mb-1");
     channel.innerHTML = channelName;
     document.querySelector('#channel-list').append(channel)
     
@@ -166,11 +164,41 @@ function channelSelected (channel) {
 };
 
 // CHANNEL MESSAGES display
-function dispChannelMessage (element) {
+function dispChannelMessage (data) {
     // display the message
-    const mes = document.createElement('div');
-    mes.innerHTML = element['message']
-    document.querySelector('#channel-disp').append(mes);
+    const mesContainer = document.createElement('div');
+    mesContainer.classList.add("container", "row", "mb-1");
+    
+    // Author and timestamp
+    const mesAuthor = document.createElement("div");
+    mesAuthor.classList.add("col-3");
+    const mesAutUser = document.createElement("div");
+    mesAutUser.classList.add("font-weight-bold");
+    mesAutUser.innerHTML = data['username'];
+    const mesAutDate = document.createElement("div");
+    mesAutDate.classList.add("font-weight-light");
+    mesAutDate.innerHTML = '<small>(' + data['insertdate'] + ')</small>';
+    mesAuthor.append(mesAutUser);
+    mesAuthor.append(mesAutDate);
+    // Message
+    const mesMessage = document.createElement("div");
+    mesMessage.classList.add("col");
+    mesMessage.innerHTML = data['message'];
+
+    // Append & display
+    if (data['username'] == localStorage.getItem("username")) {
+        mesContainer.classList.add("bg-primary", "text-white");
+        mesMessage.classList.add("text-right");
+        mesContainer.append(mesMessage);
+        mesContainer.append(mesAuthor);
+    }
+    else {
+        mesContainer.classList.add("bg-secondary", "text-white");
+        mesContainer.append(mesAuthor);
+        mesContainer.append(mesMessage);
+    }
+    
+    document.querySelector('#channel-disp').append(mesContainer);
 };
 
 
@@ -198,4 +226,5 @@ function dispChannelMessagesInput (channel) {
 };
 
 
-// ToDO: try to EMIT from server only to channels ?!?!
+// ToDo: try to EMIT from server only to channels ?!?!
+// ToDo: alert message (for channel creation) temporary!

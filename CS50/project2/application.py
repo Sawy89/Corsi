@@ -73,7 +73,7 @@ def channel_new(channel):
     else:
         channel_dict = {'name': channel, 'messages':[{'message': 'Channel created', 
                     'username': 'Admin',
-                    'insertdate': datetime.datetime.now()}]}
+                    'insertdate': datetime.datetime.now().strftime('%d-%m-%y %H:%M:%S')}]}
         channels.append(channel_dict)
         socketio.emit("new channel", channel, broadcast=True)
         return jsonify({"already_present": False}), 200
