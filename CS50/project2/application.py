@@ -13,6 +13,7 @@ max_messages_per_channel = 100
 # %% Variables
 usernames = []  # for storing registered user
 channels = []
+message_id = [0] # for counting messages, and identify univoquely
 
 
 # %% Pages
@@ -88,6 +89,7 @@ def channel_all():
     return jsonify({"channels": channels_name}), 200
 
 
+# %% API messages
 @app.route("/channel/<channel>/getmessages", methods=['GET'])
 def channel_getmessages(channel):
     '''
@@ -105,9 +107,12 @@ def new_message(data):
     '''
     Get, save and emit a new message in a specific channel
     '''
+    message_id[0] += 1
+
     # Extract data
     channel = data['channel']
     new_message = { 'channel': channel,
+                    'id': "mesid-"+str(message_id[0]),
                     'message': data['message'], 
                     'username': data['username'],
                     'insertdate': datetime.datetime.now().strftime('%d-%m-%y %H:%M:%S')}
@@ -128,3 +133,33 @@ def new_message(data):
     
     # emit the new message
     socketio.emit("new message to client", new_message, broadcast=True)
+
+
+@app.route("/channel/delmessage", methods=['POST'])
+def del_message():
+    '''
+    Delete a message, only if sent from the same username that is deleting (check by frontend)
+    JSON: channel, username, message, insertdate
+    '''
+    print(request.json)
+    if request.json and 'channel' in request.json and 'username' in request.json \
+             and 'message' in request.json  and 'insertdate' in request.json:
+        # message to delete
+        message_to_del = request.json
+        # Search for the channel
+        flag_channel_found = False
+        for channel_dict in channels:
+            if channel_dict['name'] == request.json['channel']:
+                flag_channel_found = True
+                # Search for the message
+                if message_to_del in channel_dict['messages']:
+                    # delete the message and emit
+                    channel_dict['messages'].remove(message_to_del)
+                    socketio.emit("message deleted to client", message_to_del, broadcast=True)
+                    return jsonify({"text": "Message deleted!"}), 200
+                else:
+                    return jsonify({"error": "Message not found"}), 404
+        return jsonify({"error": "Channel not found"}), 404
+    else:
+        return jsonify({"error": "Method not supported or wrong parameters."}), 405
+    

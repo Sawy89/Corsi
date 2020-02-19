@@ -29,6 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
             dispChannelMessage(data);
     });
 
+    // Delete message
+    socket.on("message deleted to client", data => {
+        if (data['channel'] == localStorage.getItem('currentChannel'))
+            deleteChannelMessage(data);
+    });
+
+
 });
 
 
@@ -171,8 +178,9 @@ function dispChannelMessage (data) {
     // display the message
     const mesContainer = document.createElement('div');
     mesContainer.classList.add("container", "row", "mb-1");
+    mesContainer.id = data["id"];
     
-    // Author and timestamp
+    // Prepare Element: Author and timestamp
     const mesAuthor = document.createElement("div");
     mesAuthor.classList.add("col-3");
     const mesAutUser = document.createElement("div");
@@ -183,17 +191,40 @@ function dispChannelMessage (data) {
     mesAutDate.innerHTML = '<small>(' + data['insertdate'] + ')</small>';
     mesAuthor.append(mesAutUser);
     mesAuthor.append(mesAutDate);
-    // Message
+    // Prepare Element: Message
     const mesMessage = document.createElement("div");
     mesMessage.classList.add("col");
     mesMessage.innerHTML = data['message'];
 
     // Append & display
     if (data['username'] == localStorage.getItem("username")) {
+        // Prepare Element: Delete button
+        const mesDelButton = document.createElement("button");
+        mesDelButton.classList.add("col-1","close");
+        mesDelButton.innerHTML = 'x';
+        mesDelButton.onclick = function (data) {
+            // Send Delete request to server
+            const request = new XMLHttpRequest();
+            request.open('POST', '/channel/delmessage');
+            request.setRequestHeader("Content-Type", "application/json");
+
+            // Result of request
+            request.onload = () => {
+                const data = JSON.parse(request.responseText);
+                if (request.status == 200) 
+                    alert('Message deleted!')
+                else
+                    alert(data['error']);
+            };
+            request.send(data);
+        };
+       
+        // Concat element and display
         mesContainer.classList.add("bg-primary", "text-white");
         mesMessage.classList.add("text-right");
         mesContainer.append(mesMessage);
         mesContainer.append(mesAuthor);
+        mesContainer.append(mesDelButton);
     }
     else {
         mesContainer.classList.add("bg-secondary", "text-white");
@@ -202,6 +233,14 @@ function dispChannelMessage (data) {
     }
     
     document.querySelector('#channel-disp').append(mesContainer);
+};
+
+
+
+// CHANNEL MESSAGES delete
+function deleteChannelMessage (data) {
+    var elementToRemove = document.querySelector("#"+data['id']);
+    elementToRemove.parentNode.removeChild(elementToRemove);
 };
 
 
