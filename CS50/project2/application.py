@@ -67,7 +67,6 @@ def channel_new(channel):
     - otherwise create it and EMIT all channel
     '''
     channels_name = [i['name'] for i in channels]
-    print(channels_name)
     is_new = False if channel in channels_name else True
     if is_new == False:
         return jsonify({"already_present": True}), 200
@@ -128,7 +127,6 @@ def new_message(data):
                 channel_dict['messages'].pop(0)
             break   # channel found!
     if flag_found == False:
-        print("Channel "+channel+" doesn't exist!")
         return jsonify({"error": 'Channel not found!'}), 404
     
     # emit the new message
@@ -141,7 +139,6 @@ def del_message():
     Delete a message, only if sent from the same username that is deleting (check by frontend)
     JSON: channel, username, message, insertdate
     '''
-    print(request.json)
     if request.json and 'channel' in request.json and 'username' in request.json \
              and 'message' in request.json  and 'insertdate' in request.json:
         # message to delete
