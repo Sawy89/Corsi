@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// LOGIN
+// LOGIN: check if the user already logged in
 function loginCheck () {
     if (!localStorage.getItem('username'))
         // Not yet registered: send to LOGIN page
@@ -65,7 +65,7 @@ function loginCheck () {
 }
 
 
-// ALL CHANNEL: take all channels from server
+// CHANNEL ALL: take all channels from server
 function allChannel () {
     // Create Get request
     var request = new XMLHttpRequest();
@@ -85,7 +85,7 @@ function allChannel () {
 };
 
 
-// FUNCTION DISABLE-ENABLE button on TEXT
+// FUNCTION: DISABLE-ENABLE button on TEXT
 function disableButton(buttonE, textE) {
     // By default, submit button is disabled
     buttonE.disabled = true;
@@ -100,7 +100,7 @@ function disableButton(buttonE, textE) {
 };
 
 
-// NEW CHANNEL: display the new channel
+// CHANNEL NEW: display the new channel
 function dispNewChannel(channelName) {
     // Create a new button with the cannel name and add it
     const channel = document.createElement('button');
@@ -118,7 +118,8 @@ function dispNewChannel(channelName) {
         channel.click();
 };
 
-// NEW CHANNEL CLICK: action when the new channel button is clicked
+
+// CHANNEL NEW CLICK: action when the new channel button is clicked
 function newChannelClicked () {
     // get the channel name (input) and send it back to server
     const channel = document.querySelector('input[name="new-channel"]').value;
@@ -170,39 +171,40 @@ function channelSelected (channel) {
     };
 
     request.send(true);
-
 };
 
-// CHANNEL MESSAGES display
-function dispChannelMessage (data) {
-    // display the message
+
+// CHANNEL MESSAGES: display
+function dispChannelMessage (messageJson) {
+    // Prepare Element: message container
     const mesContainer = document.createElement('div');
     mesContainer.classList.add("container", "row", "mb-1");
-    mesContainer.id = data["id"];
+    mesContainer.id = messageJson["id"];
     
     // Prepare Element: Author and timestamp
     const mesAuthor = document.createElement("div");
     mesAuthor.classList.add("col-3");
     const mesAutUser = document.createElement("div");
     mesAutUser.classList.add("font-weight-bold");
-    mesAutUser.innerHTML = data['username'];
+    mesAutUser.innerHTML = messageJson['username'];
     const mesAutDate = document.createElement("div");
     mesAutDate.classList.add("font-weight-light");
-    mesAutDate.innerHTML = '<small>(' + data['insertdate'] + ')</small>';
+    mesAutDate.innerHTML = '<small>(' + messageJson['insertdate'] + ')</small>';
     mesAuthor.append(mesAutUser);
     mesAuthor.append(mesAutDate);
     // Prepare Element: Message
     const mesMessage = document.createElement("div");
     mesMessage.classList.add("col");
-    mesMessage.innerHTML = data['message'];
-
+    mesMessage.innerHTML = messageJson['message'];
+    
     // Append & display
-    if (data['username'] == localStorage.getItem("username")) {
+    if (messageJson['username'] == localStorage.getItem("username")) {
+        
         // Prepare Element: Delete button
         const mesDelButton = document.createElement("button");
         mesDelButton.classList.add("col-1","close");
-        mesDelButton.innerHTML = 'x';
-        mesDelButton.onclick = function (data) {
+        mesDelButton.innerHTML = 'X';
+        mesDelButton.onclick = function () {
             // Send Delete request to server
             const request = new XMLHttpRequest();
             request.open('POST', '/channel/delmessage');
@@ -216,7 +218,8 @@ function dispChannelMessage (data) {
                 else
                     alert(data['error']);
             };
-            request.send(data);
+            var messageJson2 = JSON.stringify(messageJson);
+            request.send(messageJson2);
         };
        
         // Concat element and display
@@ -227,6 +230,7 @@ function dispChannelMessage (data) {
         mesContainer.append(mesDelButton);
     }
     else {
+        // Concat element and display
         mesContainer.classList.add("bg-secondary", "text-white");
         mesContainer.append(mesAuthor);
         mesContainer.append(mesMessage);
@@ -244,7 +248,7 @@ function deleteChannelMessage (data) {
 };
 
 
-// CHANNEL MESSAGES display input
+// CHANNEL MESSAGES: display input
 function dispChannelMessagesInput (channel) {
     // Display message input block
     inputDiv = document.getElementById("input-div");
