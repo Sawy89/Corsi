@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#new-channel').onclick = function () {
         newChannelClicked();
     };
+    // New channel ENTER pressed
+    var textNewChannel = document.querySelector('input[name="new-channel"]');
+    textNewChannel.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13 && textNewChannel.value.length > 0) {
+            event.preventDefault();
+            document.querySelector('#new-channel').click();
+        }
+    });
 
     // New channel added
     socket.on('new channel', data => {
@@ -269,6 +277,13 @@ function dispChannelMessagesInput (channel) {
         inputMessage.value = '';
         inputButton.disabled = true;    
     };
+    // Enter
+    inputMessage.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13 && inputMessage.value.length > 0) {
+            event.preventDefault();
+            inputButton.click();
+        }
+    });
 };
 
 
