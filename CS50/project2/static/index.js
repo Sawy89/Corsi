@@ -285,8 +285,3 @@ function dispChannelMessagesInput (channel) {
         }
     });
 };
-
-
-// ToDo: try to EMIT from server only to channels ?!?!
-// ToDo: alert message (for channel creation) temporary!
-// ToDO: work also with "Invio" and not only click
