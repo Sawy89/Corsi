@@ -12,9 +12,14 @@ flask run --no-reload
 
 
 ## Description
-The project follows the indication of Requirements, with the possibility to delete own messages, and the possibility to use Enter instead of clicking on buttons.
+The project follows the indication of Requirements, and it's a 2 page application, one for login and the other for all channels and messages;
+A personal touch is the possibility to delete own messages, and the possibility to use Enter instead of clicking on buttons.
 
 All Server side operation are in the "application.py" script:
 - login and home pages;
 - API for requesting and pushing channel, user, messages;
 - Emit to broadcast info to all clients;
+
+All other functionality are managed by javascript:
+- login.js for login operation
+- index.js for creating channels and messages, waiting for broadcast from server, etc.
