@@ -9,6 +9,7 @@ obj/
 # File Type
 *.csv
 *.db
+*.sqlite3
 
 # Specific file
 goodreader.txt
