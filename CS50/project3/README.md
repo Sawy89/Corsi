@@ -11,3 +11,8 @@ Web Programming with Python and JavaScript
 - To access the shell: `python manage.py shell`
 - To create admin: `python manage.py createsuperuser`
 
+
+## Import data
+Data are imported from "http://www.pinocchiospizza.net/menu.html" through /fextures/data.json file
+Launch the command `python manage.py loaddata data.json`
+(https://docs.djangoproject.com/en/3.0/howto/initial-data/)

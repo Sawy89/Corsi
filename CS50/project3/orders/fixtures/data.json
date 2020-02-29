@@ -1,0 +1,112 @@
+[
+    {
+        "model": "orders.DishCategory",
+        "pk": 1,
+        "fields": {
+            "name": "Regular Pizza",
+            "description": "Our Regular pizza is a thin-crust or Neapolitan pizza"
+        }
+    },
+    {
+        "model": "orders.DishCategory",
+        "pk": 2,
+        "fields": {
+            "name": "Sicilian Pizza",
+            "description": "Our Sicilian pizza is a deep-dish or thick-crust pizza"
+        }
+    },
+
+
+
+    {
+        "model": "orders.Dish",
+        "pk": 1,
+        "fields": {
+            "name": "Cheese",
+            "category": 1,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 2,
+        "fields": {
+            "name": "1 topping",
+            "category": 1,
+            "number_available_toppings": 1
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 3,
+        "fields": {
+            "name": "2 toppings",
+            "category": 1,
+            "number_available_toppings": 2
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 4,
+        "fields": {
+            "name": "3 toppings",
+            "category": 1,
+            "number_available_toppings": 3
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 5,
+        "fields": {
+            "name": "Special",
+            "category": 1,
+            "number_available_toppings": 5
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 6,
+        "fields": {
+            "name": "Cheese",
+            "category": 2,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 7,
+        "fields": {
+            "name": "1 item",
+            "category": 2,
+            "number_available_toppings": 1
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 8,
+        "fields": {
+            "name": "2 items",
+            "category": 2,
+            "number_available_toppings": 2
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 9,
+        "fields": {
+            "name": "3 items",
+            "category": 2,
+            "number_available_toppings": 3
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 10,
+        "fields": {
+            "name": "Special",
+            "category": 2,
+            "number_available_toppings": 5
+        }
+    }
+
+]
