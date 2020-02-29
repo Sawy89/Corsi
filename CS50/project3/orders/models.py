@@ -45,8 +45,20 @@ class DishPrice(models.Model):
     '''
     Class for different dimension of a dish
     '''
+
+    class DimensionType(models.TextChoices):
+        '''
+        Dimensions available
+        https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
+        https://docs.djangoproject.com/en/dev/ref/models/fields/#field-choices-enum-types
+        '''
+        SMALL = "S"
+        NORMAL = "N"
+        LARGE = "L"
+
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name="dimension")
-    dimension = models.CharField(max_length=32, choices=DishDimensionTypes.choices())
+    dimension = models.CharField(max_length=1, choices=DimensionType.choices, 
+                            default=DimensionType.NORMAL)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):

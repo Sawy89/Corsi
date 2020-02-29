@@ -107,6 +107,18 @@
             "category": 2,
             "number_available_toppings": 5
         }
+    },
+
+
+
+    {
+        "model": "orders.DishPrice",
+        "pk": 1,
+        "fields": {
+            "dish": 1,
+            "dimension": "S",
+            "price": 12.70
+        }
     }
 
 ]
