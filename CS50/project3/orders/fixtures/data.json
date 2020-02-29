@@ -15,7 +15,38 @@
             "description": "Our Sicilian pizza is a deep-dish or thick-crust pizza"
         }
     },
-
+    {
+        "model": "orders.DishCategory",
+        "pk": 3,
+        "fields": {
+            "name": "Subs",
+            "description": "IL miglior panino di Torino!"
+        }
+    },
+    {
+        "model": "orders.DishCategory",
+        "pk": 4,
+        "fields": {
+            "name": "Pasta",
+            "description": "La pasta buona la magni dalla nonna!"
+        }
+    },
+    {
+        "model": "orders.DishCategory",
+        "pk": 5,
+        "fields": {
+            "name": "Salads",
+            "description": "Vegetables for a light meal"
+        }
+    },
+    {
+        "model": "orders.DishCategory",
+        "pk": 6,
+        "fields": {
+            "name": "Dinner Platters",
+            "description": "These costs a lot!"
+        }
+    },
 
 
     {
@@ -108,6 +139,261 @@
             "number_available_toppings": 5
         }
     },
+    {
+        "model": "orders.Dish",
+        "pk": 11,
+        "fields": {
+            "name": "Cheese",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 12,
+        "fields": {
+            "name": "Italian",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 13,
+        "fields": {
+            "name": "Ham + Cheese",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 14,
+        "fields": {
+            "name": "Meatball",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 15,
+        "fields": {
+            "name": "Tuna",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 16,
+        "fields": {
+            "name": "Turkey",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 17,
+        "fields": {
+            "name": "Chicken Parmigiana",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 18,
+        "fields": {
+            "name": "Eggplant Parmigiana",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 19,
+        "fields": {
+            "name": "Steak",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 20,
+        "fields": {
+            "name": "Steak + Cheese",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 21,
+        "fields": {
+            "name": "Sausage, Peppers & Onions",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 22,
+        "fields": {
+            "name": "Hamburger",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 23,
+        "fields": {
+            "name": "Cheeseburger",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 24,
+        "fields": {
+            "name": "Fried Chicken",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 25,
+        "fields": {
+            "name": "Veggie",
+            "category": 3,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 26,
+        "fields": {
+            "name": "Baked Ziti w/Mozzarella",
+            "category": 4,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 27,
+        "fields": {
+            "name": "Baked Ziti w/Meatballs",
+            "category": 4,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 28,
+        "fields": {
+            "name": "Baked Ziti w/Chicken",
+            "category": 4,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 29,
+        "fields": {
+            "name": "Garden Salad",
+            "category": 5,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 30,
+        "fields": {
+            "name": "Greek Salad",
+            "category": 5,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 31,
+        "fields": {
+            "name": "Antipasto",
+            "category": 5,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 32,
+        "fields": {
+            "name": "Salad with Tuna",
+            "category": 5,
+            "number_available_toppings": 0
+        }
+    },
+    
+    
+    {
+        "model": "orders.Dish",
+        "pk": 33,
+        "fields": {
+            "name": "Garden Salad",
+            "category": 6,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 34,
+        "fields": {
+            "name": "Greek Salad",
+            "category": 6,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 35,
+        "fields": {
+            "name": "Antipasto",
+            "category": 6,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 36,
+        "fields": {
+            "name": "Baked Ziti",
+            "category": 6,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 37,
+        "fields": {
+            "name": "Meatball Parm",
+            "category": 6,
+            "number_available_toppings": 0
+        }
+    },
+    {
+        "model": "orders.Dish",
+        "pk": 38,
+        "fields": {
+            "name": "Chicken Parm",
+            "category": 6,
+            "number_available_toppings": 0
+        }
+    },
+    
 
 
 
@@ -119,6 +405,742 @@
             "dimension": "S",
             "price": 12.70
         }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 2,
+        "fields": {
+            "dish": 1,
+            "dimension": "L",
+            "price": 17.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 3,
+        "fields": {
+            "dish": 2,
+            "dimension": "S",
+            "price": 13.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 4,
+        "fields": {
+            "dish": 2,
+            "dimension": "L",
+            "price": 19.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 5,
+        "fields": {
+            "dish": 3,
+            "dimension": "S",
+            "price": 15.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 6,
+        "fields": {
+            "dish": 3,
+            "dimension": "L",
+            "price": 21.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 7,
+        "fields": {
+            "dish": 4,
+            "dimension": "S",
+            "price": 16.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 8,
+        "fields": {
+            "dish": 4,
+            "dimension": "L",
+            "price": 23.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 9,
+        "fields": {
+            "dish": 5,
+            "dimension": "S",
+            "price": 17.75
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 10,
+        "fields": {
+            "dish": 5,
+            "dimension": "L",
+            "price": 25.95
+        }
+    },
+
+    {
+        "model": "orders.DishPrice",
+        "pk": 11,
+        "fields": {
+            "dish": 6,
+            "dimension": "S",
+            "price": 24.45
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 12,
+        "fields": {
+            "dish": 6,
+            "dimension": "L",
+            "price": 38.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 13,
+        "fields": {
+            "dish": 7,
+            "dimension": "S",
+            "price": 26.45
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 14,
+        "fields": {
+            "dish": 7,
+            "dimension": "L",
+            "price": 40.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 15,
+        "fields": {
+            "dish": 8,
+            "dimension": "S",
+            "price": 28.45
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 16,
+        "fields": {
+            "dish": 8,
+            "dimension": "L",
+            "price": 42.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 17,
+        "fields": {
+            "dish": 9,
+            "dimension": "S",
+            "price": 29.45
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 18,
+        "fields": {
+            "dish": 9,
+            "dimension": "L",
+            "price": 44.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 19,
+        "fields": {
+            "dish": 10,
+            "dimension": "S",
+            "price": 30.45
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 20,
+        "fields": {
+            "dish": 10,
+            "dimension": "L",
+            "price": 45.70
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 21,
+        "fields": {
+            "dish": 11,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 22,
+        "fields": {
+            "dish": 11,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 23,
+        "fields": {
+            "dish": 12,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 24,
+        "fields": {
+            "dish": 12,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 25,
+        "fields": {
+            "dish": 13,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 26,
+        "fields": {
+            "dish": 13,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 27,
+        "fields": {
+            "dish": 14,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 28,
+        "fields": {
+            "dish": 14,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 29,
+        "fields": {
+            "dish": 15,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 30,
+        "fields": {
+            "dish": 15,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 31,
+        "fields": {
+            "dish": 16,
+            "dimension": "S",
+            "price": 7.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 32,
+        "fields": {
+            "dish": 16,
+            "dimension": "L",
+            "price": 8.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 33,
+        "fields": {
+            "dish": 17,
+            "dimension": "S",
+            "price": 7.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 34,
+        "fields": {
+            "dish": 17,
+            "dimension": "L",
+            "price": 8.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 35,
+        "fields": {
+            "dish": 18,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 36,
+        "fields": {
+            "dish": 18,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 37,
+        "fields": {
+            "dish": 19,
+            "dimension": "S",
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 38,
+        "fields": {
+            "dish": 19,
+            "dimension": "L",
+            "price": 7.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 39,
+        "fields": {
+            "dish": 20,
+            "dimension": "S",
+            "price": 6.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 40,
+        "fields": {
+            "dish": 20,
+            "dimension": "L",
+            "price": 8.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 41,
+        "fields": {
+            "dish": 21,
+            "dimension": "L",
+            "price": 8.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 42,
+        "fields": {
+            "dish": 22,
+            "dimension": "S",
+            "price": 4.6
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 43,
+        "fields": {
+            "dish": 22,
+            "dimension": "L",
+            "price": 6.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 44,
+        "fields": {
+            "dish": 23,
+            "dimension": "S",
+            "price": 5.10
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 45,
+        "fields": {
+            "dish": 23,
+            "dimension": "L",
+            "price": 7.45
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 46,
+        "fields": {
+            "dish": 24,
+            "dimension": "S",
+            "price": 6.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 47,
+        "fields": {
+            "dish": 24,
+            "dimension": "L",
+            "price": 8.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 48,
+        "fields": {
+            "dish": 25,
+            "dimension": "S",
+            "price": 6.95
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 49,
+        "fields": {
+            "dish": 25,
+            "dimension": "L",
+            "price": 8.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 50,
+        "fields": {
+            "dish": 26,
+            "price": 6.5
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 51,
+        "fields": {
+            "dish": 27,
+            "price": 8.75
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 52,
+        "fields": {
+            "dish": 28,
+            "price": 9.75
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 53,
+        "fields": {
+            "dish": 29,
+            "price": 6.25
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 54,
+        "fields": {
+            "dish": 30,
+            "price": 8.25
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 55,
+        "fields": {
+            "dish": 31,
+            "price": 8.25
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 56,
+        "fields": {
+            "dish": 32,
+            "price": 8.25
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 57,
+        "fields": {
+            "dish": 33,
+            "dimension": "S",
+            "price": 40
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 58,
+        "fields": {
+            "dish": 33,
+            "dimension": "L",
+            "price": 65
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 59,
+        "fields": {
+            "dish": 34,
+            "dimension": "S",
+            "price": 50
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 60,
+        "fields": {
+            "dish": 34,
+            "dimension": "L",
+            "price": 75
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 61,
+        "fields": {
+            "dish": 35,
+            "dimension": "S",
+            "price": 50
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 62,
+        "fields": {
+            "dish": 35,
+            "dimension": "L",
+            "price": 75
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 63,
+        "fields": {
+            "dish": 36,
+            "dimension": "S",
+            "price": 40
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 64,
+        "fields": {
+            "dish": 36,
+            "dimension": "L",
+            "price": 65
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 65,
+        "fields": {
+            "dish": 37,
+            "dimension": "S",
+            "price": 50
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 66,
+        "fields": {
+            "dish": 37,
+            "dimension": "L",
+            "price": 75
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 67,
+        "fields": {
+            "dish": 38,
+            "dimension": "S",
+            "price": 55
+        }
+    },
+    {
+        "model": "orders.DishPrice",
+        "pk": 68,
+        "fields": {
+            "dish": 38,
+            "dimension": "L",
+            "price": 85
+        }
+    },
+
+
+
+    {
+        "model": "orders.Topping",
+        "pk": 1,
+        "fields":{"name": "Pepperoni"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 2,
+        "fields":{"name": "Sausage"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 3,
+        "fields":{"name": "Mushrooms"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 4,
+        "fields":{"name": "Onions"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 5,
+        "fields":{"name": "Ham"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 6,
+        "fields":{"name": "Canadian Bacon"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 7,
+        "fields":{"name": "Pineapple"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 8,
+        "fields":{"name": "Eggplant"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 9,
+        "fields":{"name": "Tomato & Basil"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 10,
+        "fields":{"name": "Green Peppers"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 11,
+        "fields":{"name": "Hamburger"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 12,
+        "fields":{"name": "Spinach"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 13,
+        "fields":{"name": "Artichoke"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 14,
+        "fields":{"name": "Buffalo Chicken"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 15,
+        "fields":{"name": "Barbecue Chicken"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 16,
+        "fields":{"name": "Anchovies"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 17,
+        "fields":{"name": "Black Olives"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 18,
+        "fields":{"name": "Fresh Garlic"}
+    },
+    {
+        "model": "orders.Topping",
+        "pk": 19,
+        "fields":{"name": "Zucchini"}
+    },
+
+
+
+    {
+        "model": "orders.Addition",
+        "pk": 1,
+        "fields": {
+            "name": "Mushrooms",
+            "price": 0.5,
+            "dish": [20]
+        }
+    },
+    {
+        "model": "orders.Addition",
+        "pk": 2,
+        "fields": {
+            "name": "Green Peppers",
+            "price": 0.5,
+            "dish": [20]
+        }
+    },
+    {
+        "model": "orders.Addition",
+        "pk": 3,
+        "fields": {
+            "name": "Onions",
+            "price": 0.5,
+            "dish": [20]
+        }
+    },
+    {
+        "model": "orders.Addition",
+        "pk": 4,
+        "fields": {
+            "name": "Extra Cheese",
+            "price": 0.5,
+            "dish": [11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+        }
     }
+
+
 
 ]

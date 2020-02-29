@@ -27,20 +27,6 @@ class Dish(models.Model):
     # def getDimension():
 
 
-class DishDimensionTypes(Enum):
-    '''
-    Enum of dimension types
-    https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
-    '''
-    SMALL = "SMALL"
-    NORMAL = "NORMAL"
-    LARGE = "LARGE"
-
-    @classmethod
-    def choices(cls):
-        return tuple((i.name, i.value) for i in cls)
-
-
 class DishPrice(models.Model):
     '''
     Class for different dimension of a dish
@@ -53,7 +39,7 @@ class DishPrice(models.Model):
         https://docs.djangoproject.com/en/dev/ref/models/fields/#field-choices-enum-types
         '''
         SMALL = "S"
-        NORMAL = "N"
+        NORMAL = "M"
         LARGE = "L"
 
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name="dimension")
