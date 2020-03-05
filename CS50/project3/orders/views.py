@@ -31,4 +31,4 @@ def signup(request):
 
 @login_required
 def my_view(request):
-    return HttpResponse("Fuck yeah ")
+    return render(request, 'index.html')
