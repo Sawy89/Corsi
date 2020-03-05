@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*'] # otherwise on docker toolbox was not working
 
+ACCOUNT_ACTIVATION_DAYS = 7  # window for activate the account
 
 # Application definition
 
