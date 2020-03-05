@@ -20,6 +20,5 @@ urlpatterns = [
     path("", include("orders.urls")),
     path("admin/", admin.site.urls),
     # Auth
-    path('accounts/', include('django_registration.backends.activation.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
