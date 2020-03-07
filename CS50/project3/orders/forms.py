@@ -26,3 +26,6 @@ class UserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+# ToDo: for upgrading login form: https://stackoverflow.com/questions/48814504/how-can-i-add-a-class-atribute-to-django-auth-login-form
