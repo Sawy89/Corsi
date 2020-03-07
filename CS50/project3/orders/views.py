@@ -3,11 +3,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import UserCreationForm
+from .models import *
 
 
-# Create your views here.
+
+@login_required
 def index(request):
-    return HttpResponse("Project 3: TODO")
+    return render(request, 'index.html')
 
 
 def signup(request):
@@ -30,5 +32,7 @@ def signup(request):
 
 
 @login_required
-def my_view(request):
-    return render(request, 'index.html')
+def menu(request):
+    listaDishCategory = DishCategory.objects.all()
+
+    return render(request, 'orders/menu.html', {"DishCategory": DishCategory.objects.all()})

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+{% block head %}
+    <script src="{% static 'orders/menu.js' %}"></script>
+    
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Pinochio's Menù</h1>
+
+  {% for dishCat in DishCategory %}
+
+    <div class="container dish-category">
+        <div class="row">
+            <h3>{{ dishCat.name }}</h3>
+            <button>Show</button>
+        </div>
+        <div class="dish-list">
+            <p>Cavolo</p>
+        </div>
+    </div>
+
+  {% endfor %}
+
+</div>
+
+
+{% endblock %}
