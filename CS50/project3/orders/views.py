@@ -35,4 +35,5 @@ def signup(request):
 def menu(request):
     listaDishCategory = DishCategory.objects.all()
 
-    return render(request, 'orders/menu.html', {"DishCategory": DishCategory.objects.all()})
+    return render(request, 'orders/menu.html', {"DishCategory": DishCategory.objects.all(),
+                                                "Dish": Dish.objects.all()})

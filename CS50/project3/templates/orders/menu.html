@@ -14,12 +14,17 @@
 
     <div class="container dish-category">
         <div class="row">
-            <h3>{{ dishCat.name }}</h3>
+            <h3 class="mr-4">{{ dishCat.name }}</h3>
             <button>Show</button>
         </div>
-        <div class="dish-list">
-            <p>Cavolo</p>
-        </div>
+        <ul class="dish-list">
+          {% for dish in Dish %}
+            {% if dish.category == dishCat %}
+            <li>{{ dish.name }}</li>
+            {% endif %}
+          {% endfor %}
+
+        </ul>
     </div>
 
   {% endfor %}
