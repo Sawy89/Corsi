@@ -12,12 +12,12 @@
 
   {% for dishCat in DishCategory %}
 
-    <div class="container dish-category">
+    <div class="container dish-category m-4">
         <div class="row">
-            <h3 class="mr-4">{{ dishCat.name }}</h3>
+            <h3 class="mr-4 col-2">{{ dishCat.name }}</h3>
             <button>Show</button>
         </div>
-        <ul class="dish-list">
+        <ul class="row dish-list m-2">
           {% for dish in Dish %}
             {% if dish.category == dishCat %}
             <li>{{ dish.name }}</li>
