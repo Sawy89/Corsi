@@ -33,7 +33,11 @@ def signup(request):
 
 @login_required
 def menu(request):
-    listaDishCategory = DishCategory.objects.all()
+    # Add info addition
+    DishProc = Dish.objects.all()
+    for dish in DishProc:
+        dish.addition_present = dish.addition.exists()
 
     return render(request, 'orders/menu.html', {"DishCategory": DishCategory.objects.all(),
-                                                "Dish": Dish.objects.all()})
+                                                "Dish": DishProc,
+                                                "Addition": Addition.objects.all()})
