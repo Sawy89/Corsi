@@ -19,30 +19,53 @@
           <button>Show</button>
       </div>
 
-      <ul class="row dish-list m-2">
+      <table class="dish-list m-2" style="width:100%">
+        <tr>
+          <th></th> <!-- Dish -->
+
+          {% if 'S' in dishCat.available_dimension %}
+            <th>Small</th> 
+          {% endif %}
+          {% if 'M' in dishCat.available_dimension %}
+            <th></th>
+          {% endif %}
+          {% if 'L' in dishCat.available_dimension %}
+            <th>Large</th>
+          {% endif %}
+          
+          <th></th> <!-- Topping/addition button -->
+        </tr>
         
         {% for dish in Dish %}
 
           {% if dish.category == dishCat %}
-            <li class="">
-              <span class="dish-name">{{ dish.name }}</span>
-              <span>
-                {% if dish.number_available_toppings > 0 %}
-                  <button>toppings</button>
-                {% endif %}
-              </span>
-              <span>
-                {% if dish.addition_present %}
-                  <button>addition</button>
-                {% endif %}
-              </span>
+            <tr class="">
+              <td class="dish-name">{{ dish.name }}</td>
+              
+              {% if 'S' in dishCat.available_dimension %}
+                <td>{{ dish.prices.S }}</td> 
+              {% endif %}
+              {% if 'M' in dishCat.available_dimension %}
+                <td>{{ dish.prices.M }}</td>
+              {% endif %}
+              {% if 'L' in dishCat.available_dimension %}
+                <td>{{ dish.prices.L }}</td>
+              {% endif %}
+              
+              {% if dish.number_available_toppings > 0 %}
+                <td><button>toppings</button></td>
+              {% endif %}
+              
+              {% if dish.addition_present %}
+                <td><button>addition</button></td>
+              {% endif %}
 
-            </li>
+            </tr>
           {% endif %}
 
         {% endfor %}
 
-      </ul>
+          </table>
     </div>
 
   {% endfor %}
