@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function showHide(element) {
     // https://www.w3schools.com/howto/howto_js_collapsible.asp
-    element.querySelector(".dish-list").style.display = 'block'; 
+    element.querySelector(".dish-list").style.display = 'none'; 
     element.querySelector(".dish-list").style.overflow = 'Hide';
     element.querySelector("button").onclick = function () {
         // alert("Hello World!");
