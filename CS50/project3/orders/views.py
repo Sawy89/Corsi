@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import UserCreationForm
+import json
 from .models import *
 
 
@@ -37,6 +38,8 @@ def menu(request):
     DishProc = Dish.objects.all()
     for dish in DishProc:
         dish.addition_present = dish.addition.exists()
+        dish.addition_list = list(dish.addition.values_list('id','name','price'))
+
         # add prices (if any, leave empty)
         dish.prices = dict(list(DishPrice.objects.filter(dish=dish.id).all().values_list('dimension','price')))
         for i in DishPrice.DimensionType.choices:
@@ -49,14 +52,6 @@ def menu(request):
         list_dim = list(DishPrice.objects.filter(dish__category=dishcat.id).values_list('dimension', flat=True).distinct())
         dishcat.available_dimension = list_dim
 
-
     return render(request, 'orders/menu.html', {"DishCategory": DishCatProc,
                                                 "Dish": DishProc,
-                                                "Addition": Addition.objects.all()})
-
-
-def get_toppings(request):
-    '''
-    Get the toppings for pizzas!
-    '''
-
+                                                "Toppings": Topping.objects.all()})

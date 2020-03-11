@@ -10,66 +10,89 @@
 <div class="container">
   <h1>Pinochio's Menù</h1>
 
-  {% for dishCat in DishCategory %}
+  <div class="row">
 
-    <div class="container dish-category m-4">
+    <div class='col-10'>
+    {% for dishCat in DishCategory %}
 
-      <div class="row">
-          <h3 class="mr-4 col-2">{{ dishCat.name }}</h3>
-          <button>Show</button>
+      <div class="container dish-category m-4">
+
+        <div class="row">
+            <h3 class="mr-4 col-2">{{ dishCat.name }}</h3>
+            <button>Show</button>
+        </div>
+
+        <div class="dish-list m-2 w-75"><table class="table">
+          <tr>
+            <th></th> <!-- Dish -->
+
+            {% if 'S' in dishCat.available_dimension %}
+              <th>Small</th> 
+            {% endif %}
+            {% if 'M' in dishCat.available_dimension %}
+              <th></th>
+            {% endif %}
+            {% if 'L' in dishCat.available_dimension %}
+              <th>Large</th>
+            {% endif %}
+            
+            <th></th> <!-- Topping/addition button -->
+          </tr>
+          
+          {% for dish in Dish %}
+
+            {% if dish.category == dishCat %}
+              <tr class="cl-10">
+                <td class="dish-name">{{ dish.name }}</td>
+                
+                <!-- Prices -->
+                {% if 'S' in dishCat.available_dimension %}
+                  <td>{{ dish.prices.S }}</td> 
+                {% endif %}
+                {% if 'M' in dishCat.available_dimension %}
+                  <td>{{ dish.prices.M }}</td>
+                {% endif %}
+                {% if 'L' in dishCat.available_dimension %}
+                  <td>{{ dish.prices.L }}</td>
+                {% endif %}
+                
+                {% if dish.number_available_toppings > 0 %}
+                  <td><button class="topping" data-n-available="{{ dish.number_available_toppings }}">toppings</button></td>
+                {% endif %}
+
+                <!-- Addition -->
+                {% if dish.addition_present %}
+                  <td>
+                    {% for id, nome, prezzo in dish.addition_list %}
+                      <input type="checkbox" id="addition-{{ id }}" name="addition-dish-{{ dish.id }}">
+                      <label>{{ nome }}: +{{ prezzo }}</label><br>
+                    {% endfor%}
+                  </td>
+                {% endif %}
+              </tr>
+            {% endif %}
+
+          {% endfor %}
+
+        </table></div>
       </div>
 
-      <div class="dish-list m-2"><table class="table">
-        <tr>
-          <th></th> <!-- Dish -->
-
-          {% if 'S' in dishCat.available_dimension %}
-            <th>Small</th> 
-          {% endif %}
-          {% if 'M' in dishCat.available_dimension %}
-            <th></th>
-          {% endif %}
-          {% if 'L' in dishCat.available_dimension %}
-            <th>Large</th>
-          {% endif %}
-          
-          <th></th> <!-- Topping/addition button -->
-        </tr>
-        
-        {% for dish in Dish %}
-
-          {% if dish.category == dishCat %}
-            <tr class="">
-              <td class="dish-name">{{ dish.name }}</td>
-              
-              {% if 'S' in dishCat.available_dimension %}
-                <td>{{ dish.prices.S }}</td> 
-              {% endif %}
-              {% if 'M' in dishCat.available_dimension %}
-                <td>{{ dish.prices.M }}</td>
-              {% endif %}
-              {% if 'L' in dishCat.available_dimension %}
-                <td>{{ dish.prices.L }}</td>
-              {% endif %}
-              
-              {% if dish.number_available_toppings > 0 %}
-                <td><button>toppings</button></td>
-              {% endif %}
-              
-              {% if dish.addition_present %}
-                <td><button>addition</button></td>
-              {% endif %}
-
-            </tr>
-          {% endif %}
-
-        {% endfor %}
-
-      </table></div>
+    {% endfor %}
     </div>
 
-  {% endfor %}
+    <div class="col-2">
+      <h3>Toppings</h3>
+      <table>
+        {% for topping in Toppings %}
+        <tr><td>
+          <input type="checkbox" id="topping-{{ topping.id }}" name="topping" value="{{ topping.name }}">
+          <label>{{ topping.name }}</label>
+        </td></tr>
+        {% endfor %}
+      </table>
+    </div>
 
+  </div>
 </div>
 
 
