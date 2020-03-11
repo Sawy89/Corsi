@@ -42,6 +42,7 @@ def menu(request):
 
         # add prices (if any, leave empty)
         dish.prices = dict(list(DishPrice.objects.filter(dish=dish.id).all().values_list('dimension','price')))
+        dish.prices_id = dict(list(DishPrice.objects.filter(dish=dish.id).all().values_list('dimension','id')))
     
     # Add info small/large or normal
     DishCatProc = DishCategory.objects.all()

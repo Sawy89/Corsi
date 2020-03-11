@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var dishNumber = 0;
     document.querySelectorAll('.dish-category').forEach(element => showHide(element));
 
+    // Add to Cart
+    // document.addEventListener()
+
 });
 
 
@@ -22,3 +25,6 @@ function showHide(element) {
         }
     };
 };
+
+// ToDo: javascript per aggiungere al carrello
+ 
