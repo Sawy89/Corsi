@@ -18,25 +18,25 @@
       <div class="container dish-category m-4">
 
         <div class="row">
-            <h3 class="mr-4 col-2">{{ dishCat.name }}</h3>
-            <button>Show</button>
+            <h3 class="mr-4 col-9">{{ dishCat.name }}</h3>
+            <button class="col-1">Show</button>
         </div>
 
         <div class="dish-list m-2 w-75"><table class="table">
           <tr>
-            <th></th> <!-- Dish -->
+            <th style="width: 25%"></th> <!-- Dish -->
 
             {% if 'S' in dishCat.available_dimension %}
-              <th>Small</th> 
+              <th style="width: 25%">Small</th> 
             {% endif %}
             {% if 'M' in dishCat.available_dimension %}
-              <th></th>
+              <th style="width: 25%">Normal</th>
             {% endif %}
             {% if 'L' in dishCat.available_dimension %}
-              <th>Large</th>
+              <th style="width: 25%">Large</th>
             {% endif %}
             
-            <th></th> <!-- Topping/addition button -->
+            <th style="width: 25%"></th> <!-- Topping/addition button -->
           </tr>
           
           {% for dish in Dish %}
