@@ -42,9 +42,6 @@ def menu(request):
 
         # add prices (if any, leave empty)
         dish.prices = dict(list(DishPrice.objects.filter(dish=dish.id).all().values_list('dimension','price')))
-        for i in DishPrice.DimensionType.choices:
-            if i[0] not in dish.prices.keys():
-                dish.prices[i[0]] = ' - '
     
     # Add info small/large or normal
     DishCatProc = DishCategory.objects.all()
@@ -55,3 +52,6 @@ def menu(request):
     return render(request, 'orders/menu.html', {"DishCategory": DishCatProc,
                                                 "Dish": DishProc,
                                                 "Toppings": Topping.objects.all()})
+
+
+# ToDO: fissare i toppings che si muovano con la barra!

@@ -8,13 +8,19 @@
   {% block head %} {% endblock %}
 </head>
 <body>
-  <!-- Here is the logout button, always present -->
   <div class="d-flex flex-row-reverse">
+
+  <!-- Here is the logout button, always present -->
     <div class="float-right">
       <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
         <span class="glyphicon glyphicon-log-out"></span>
       </a>
     </div>
+  
+  <!-- Here is the shopping cart -->
+    <button type="button" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+    </button>
   </div>
 
   {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}

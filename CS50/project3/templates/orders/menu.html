@@ -17,11 +17,13 @@
 
       <div class="container dish-category m-4">
 
+        <!-- Dish Category -->
         <div class="row">
             <h3 class="mr-4 col-9">{{ dishCat.name }}</h3>
             <button class="col-1">Show</button>
         </div>
 
+        <!-- List of Dish -->
         <div class="dish-list m-2 w-75"><table class="table">
           <tr>
             <th style="width: 25%"></th> <!-- Dish -->
@@ -46,18 +48,35 @@
                 <td class="dish-name">{{ dish.name }}</td>
                 
                 <!-- Prices -->
-                {% if 'S' in dishCat.available_dimension %}
-                  <td>{{ dish.prices.S }}</td> 
+                {% if dish.prices.S %}
+                  <td>
+                    <span>{{ dish.prices.S }}</span>
+                    <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                  </td> 
+                {% elif 'S' in dishCat.available_dimension %}
+                  <td> - </td>
                 {% endif %}
+
                 {% if 'M' in dishCat.available_dimension %}
-                  <td>{{ dish.prices.M }}</td>
+                <td>
+                  <span>{{ dish.prices.M }}</span>
+                  <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                </td> 
+                {% elif 'M' in dishCat.available_dimension %}
+                  <td> - </td>
                 {% endif %}
+                
                 {% if 'L' in dishCat.available_dimension %}
-                  <td>{{ dish.prices.L }}</td>
+                <td>
+                  <span>{{ dish.prices.L }}</span>
+                  <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                </td> 
+                {% elif 'L' in dishCat.available_dimension %}
+                <td> - </td>
                 {% endif %}
                 
                 {% if dish.number_available_toppings > 0 %}
-                  <td><button class="topping" data-n-available="{{ dish.number_available_toppings }}">toppings</button></td>
+                  <td class="topping" data-n-available="{{ dish.number_available_toppings }}"></td>
                 {% endif %}
 
                 <!-- Addition -->
