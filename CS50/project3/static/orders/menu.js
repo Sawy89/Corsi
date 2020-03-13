@@ -14,6 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Topping display
+    // ToDo: it's not working
+    document.querySelectorAll('toppings').forEach( (item) => {
+        item.addEventListener("change", () => {
+            showSelectedToppings();
+        });
+    });
+    
+
 });
 
 
@@ -42,7 +51,7 @@ function getSelectedTopping(to_decheck) {
         // Get checked
         if (element.checked){
             toppings.push(element.dataset.toppingid); // save topping id
-            toppingsName.push(element.name); // save topping name
+            toppingsName.push(element.dataset.name); // save topping name
             if (to_decheck)
                 element.checked = false;
         };
@@ -52,8 +61,15 @@ function getSelectedTopping(to_decheck) {
 
 
 // Function show selected topping
-function showSelectedToppings(element) {
-
+function showSelectedToppings() {
+    Topp = getSelectedTopping(false);
+    toppingsName = Topp[1];
+    document.querySelectorAll(".topping-disp").forEach(element => {
+        if (toppingsName != null && element.dataset.navailable == toppingsName.length)
+            element.innerHTML = toppingsName; // ToDo: show a better string!
+        else
+            element.innerHTML = '';
+    });
 };
 
 
