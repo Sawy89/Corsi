@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Topping display
-    // ToDo: it's not working
-    document.querySelectorAll('toppings').forEach( (item) => {
+    document.querySelectorAll('.toppings').forEach( (item) => {
         item.addEventListener("change", () => {
             showSelectedToppings();
         });
@@ -67,6 +66,7 @@ function showSelectedToppings() {
     document.querySelectorAll(".topping-disp").forEach(element => {
         if (toppingsName != null && element.dataset.navailable == toppingsName.length)
             element.innerHTML = toppingsName; // ToDo: show a better string!
+            // ToDO: it works also for <=???
         else
             element.innerHTML = '';
     });
