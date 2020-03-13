@@ -5,7 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.dish-category').forEach(element => showHide(element));
 
     // Add to Cart
-    // document.addEventListener()
+    document.querySelectorAll('.glyphicon-shopping-cart').forEach( (item) => {
+        item.addEventListener("click", () => {
+            addToCart();
+        });
+    });
 
 });
 
@@ -27,4 +31,6 @@ function showHide(element) {
 };
 
 // ToDo: javascript per aggiungere al carrello
- 
+function addToCart() {
+    alert("Fucking yeah!")
+};
