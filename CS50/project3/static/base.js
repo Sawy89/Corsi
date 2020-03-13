@@ -6,10 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// Function to update the Cart ICON
 function updateCartIcon() {
-    cartPriceidList = JSON.parse(localStorage.getItem('cart-priceid-list'));
-    if (cartPriceidList.length > 0)
-        document.querySelector('#cart-element-number').innerHTML = cartPriceidList.length;    
+    cartPriceidList = JSON.parse(localStorage.getItem('cart-list'));
+    if (cart !== null && cart.length > 0)
+        document.querySelector('#cart-element-number').innerHTML = cart.length;    
     else
-    document.querySelector('#cart-element-number').innerHTML = '';
+        document.querySelector('#cart-element-number').innerHTML = '';
 };

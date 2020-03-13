@@ -51,7 +51,7 @@
                 {% if dish.prices.S %}
                   <td>
                     <span>{{ dish.prices.S }}</span>
-                    <a href="#" data-priceid="{{ dish.prices_id.S }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
+                    <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.S }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
                   </td> 
                 {% elif 'S' in dishCat.available_dimension %}
                   <td> - </td>
@@ -60,7 +60,7 @@
                 {% if 'M' in dishCat.available_dimension %}
                 <td>
                   <span>{{ dish.prices.M }}</span>
-                  <a href="#" data-priceid="{{ dish.prices_id.M }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
+                  <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.M }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
                 </td> 
                 {% elif 'M' in dishCat.available_dimension %}
                   <td> - </td>
@@ -69,7 +69,7 @@
                 {% if 'L' in dishCat.available_dimension %}
                 <td>
                   <span>{{ dish.prices.L }}</span>
-                  <a href="#" data-priceid="{{ dish.prices_id.L }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
+                  <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.L }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
                 </td> 
                 {% elif 'L' in dishCat.available_dimension %}
                 <td> - </td>
@@ -83,7 +83,7 @@
                 {% if dish.addition_present %}
                   <td>
                     {% for id, nome, prezzo in dish.addition_list %}
-                      <input type="checkbox" id="addition-{{ id }}" name="addition-dish-{{ dish.id }}">
+                      <input type="checkbox" class="dish-{{ dish.id }}" data-additionid="{{ id }}" name="addition-dish-{{ dish.id }}">
                       <label>{{ nome }}: +{{ prezzo }}</label><br>
                     {% endfor%}
                   </td>
