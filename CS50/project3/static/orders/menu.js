@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var dishNumber = 0;
     document.querySelectorAll('.dish-category').forEach(element => showHide(element));
 
+    // Update cart icon
+    updateCartIcon();
+
     // Add to Cart
     document.querySelectorAll('.add-to-chart').forEach( (item) => {
         item.addEventListener("click", (event) => {
@@ -46,6 +49,18 @@ function addToCart(item) {
     cartPriceidList.push(parseInt(priceid));
     localStorage.setItem('cart-priceid-list', JSON.stringify(cartPriceidList));
 
+    // Update cart icon
+    updateCartIcon();
+
     // ToDO: add alert with product name
     alert("Fucking yeah! N° "+priceid);
+};
+
+
+function updateCartIcon() {
+    cartPriceidList = JSON.parse(localStorage.getItem('cart-priceid-list'));
+    if (cartPriceidList.length > 0)
+        document.querySelector('#cart-element-number').innerHTML = cartPriceidList.length;    
+    else
+    document.querySelector('#cart-element-number').innerHTML = '';
 };

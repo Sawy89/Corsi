@@ -8,20 +8,27 @@
   {% block head %} {% endblock %}
 </head>
 <body>
+  {% if user.is_authenticated %}
   <div class="d-flex flex-row-reverse">
 
-  <!-- Here is the logout button, always present -->
+    <!-- Here is the logout button, always present -->
     <div class="float-right">
       <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
         <span class="glyphicon glyphicon-log-out"></span>
       </a>
     </div>
   
-  <!-- Here is the shopping cart -->
+    
+    <!-- Here is the shopping cart -->
     <button type="button" class="btn btn-default btn-sm">
-      <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+      <span id="cart" class="glyphicon glyphicon-shopping-cart"></span>
+      <span>Shopping Cart</span>
+      <span id="cart-element-number" class="badge badge-light"></span>
     </button>
+
   </div>
+  {% endif %}
+
 
   {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
   {% block content %}<!-- default content text (typically empty) -->{% endblock %}
