@@ -34,11 +34,35 @@ function showHide(element) {
 };
 
 
+// Function to scan toppings checklist
+function getSelectedTopping(to_decheck) {
+    var toppings = [];
+    var toppingsName = [];
+    document.querySelectorAll(".toppings").forEach(element => {
+        // Get checked
+        if (element.checked){
+            toppings.push(element.dataset.toppingid); // save topping id
+            toppingsName.push(element.name); // save topping name
+            if (to_decheck)
+                element.checked = false;
+        };
+    });
+    return [toppings, toppingsName];
+};
+
+
+// Function show selected topping
+function showSelectedToppings(element) {
+
+};
+
+
 // Adding to cart
 function addToCart(item) {
-    // Extract data
+    // Extract price and dish clicked
     var priceid = parseInt(item.dataset.priceid);
     var dishid = item.dataset.dishid;
+    // Extract if addition clicked
     var addition = [];
     document.querySelectorAll(".dish-"+dishid).forEach(element => {
         // Verify selected addition
@@ -47,6 +71,19 @@ function addToCart(item) {
             addition.push(parseInt(element.dataset.additionid));
         };
     });
+    // Extract if toppings selected
+    var ntopping = item.dataset.ntopping;
+    Topp = getSelectedTopping(true);
+    toppings = Topp[0];
+    // Check topping number
+    if (toppings != null && toppings.length > ntopping) {
+        alert("Too many toppings selected");
+        return;
+    }
+    else if (toppings  != null && toppings.length < ntopping) {
+        alert("Too few toppings!");
+        return;
+    }
     
     // Get local cart
     if (localStorage.getItem('cart-list'))
@@ -56,7 +93,8 @@ function addToCart(item) {
 
     // Prepare item
     var itemDictToAdd = {'priceId': priceid,
-                            'addition': addition};
+                        'addition': addition,
+                        'topping': toppings};
 
     // Save to local cart
     cart.push(itemDictToAdd);
@@ -66,6 +104,6 @@ function addToCart(item) {
     updateCartIcon();
 
     // ToDO: add alert with product name
-    alert("Fucking yeah! Price N° "+priceid+", Dish N° "+dishid);
+    alert("Fucking yeah! Price N° "+priceid+", Dish N° "+dishid+", addition "+addition+", Topping "+toppings);
 };
 

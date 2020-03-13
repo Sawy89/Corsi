@@ -51,7 +51,7 @@
                 {% if dish.prices.S %}
                   <td>
                     <span>{{ dish.prices.S }}</span>
-                    <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.S }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
+                    <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.S }}" data-ntopping="{{ dish.number_available_toppings }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
                   </td> 
                 {% elif 'S' in dishCat.available_dimension %}
                   <td> - </td>
@@ -60,7 +60,7 @@
                 {% if 'M' in dishCat.available_dimension %}
                 <td>
                   <span>{{ dish.prices.M }}</span>
-                  <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.M }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
+                  <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.M }}" data-ntopping="{{ dish.number_available_toppings }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
                 </td> 
                 {% elif 'M' in dishCat.available_dimension %}
                   <td> - </td>
@@ -69,12 +69,13 @@
                 {% if 'L' in dishCat.available_dimension %}
                 <td>
                   <span>{{ dish.prices.L }}</span>
-                  <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.L }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
+                  <a href="#" data-dishid="{{ dish.id }}" data-priceid="{{ dish.prices_id.L }}" data-ntopping="{{ dish.number_available_toppings }}" class="glyphicon glyphicon-shopping-cart add-to-chart">
                 </td> 
                 {% elif 'L' in dishCat.available_dimension %}
                 <td> - </td>
                 {% endif %}
                 
+                <!-- Toppings -->
                 {% if dish.number_available_toppings > 0 %}
                   <td class="topping" data-n-available="{{ dish.number_available_toppings }}"></td>
                 {% endif %}
@@ -104,7 +105,7 @@
       <table>
         {% for topping in Toppings %}
         <tr><td>
-          <input type="checkbox" id="topping-{{ topping.id }}" name="topping" value="{{ topping.name }}">
+          <input type="checkbox" class="toppings" id="topping-{{ topping.id }}" data-toppingid="{{ topping.id }}" data-name="{{ topping.name }}" value="{{ topping.name }}">
           <label>{{ topping.name }}</label>
         </td></tr>
         {% endfor %}
