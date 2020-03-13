@@ -5,9 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.dish-category').forEach(element => showHide(element));
 
     // Add to Cart
-    document.querySelectorAll('.glyphicon-shopping-cart').forEach( (item) => {
-        item.addEventListener("click", () => {
-            addToCart();
+    document.querySelectorAll('.add-to-chart').forEach( (item) => {
+        item.addEventListener("click", (event) => {
+            // prevent browser's default action
+            event.preventDefault();
+
+            addToCart(item);
         });
     });
 
@@ -30,7 +33,19 @@ function showHide(element) {
     };
 };
 
-// ToDo: javascript per aggiungere al carrello
-function addToCart() {
-    alert("Fucking yeah!")
+
+// Adding to cart
+function addToCart(item) {
+    var priceid = item.dataset.priceid;
+
+    // Save to local cart
+    if (localStorage.getItem('cart-priceid-list'))
+        cartPriceidList = JSON.parse(localStorage.getItem('cart-priceid-list'));
+    else
+        cartPriceidList = [];
+    cartPriceidList.push(parseInt(priceid));
+    localStorage.setItem('cart-priceid-list', JSON.stringify(cartPriceidList));
+
+    // ToDO: add alert with product name
+    alert("Fucking yeah! N° "+priceid);
 };
