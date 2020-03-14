@@ -8,13 +8,21 @@
 
 {% block content %}
 
-<div class="container row">
+<div class="container">
     <h1>Hello {{ user.username }}!</h1>
     <p>Here is your order! Confirm and you'll have a slice of our fantastic italian taste!</p>
 </div>
 
 <div class="container row">
-    {{ a }}
+    <div class="dish-list m-2 w-75"><table class="table">
+        <tr>
+            <th>Dish</th>
+            <th>Dish</th>
+            <th>Dish</th>
+        </tr>
+    </table></div>
 </div>
+<p>{{ cart }}</p>
+<!-- ToDo: fare un bel plot dello shopping cart! -->
 
 {% endblock %}

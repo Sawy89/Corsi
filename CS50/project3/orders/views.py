@@ -63,8 +63,32 @@ def shopping_cart(request):
     # Get cart item
     form_input = request.POST['cart']
     form_input_json = json.loads(form_input)
-    cart_item = form_input_json['cart']
+    cart_items = form_input_json['cart']
 
-    return render(request, 'orders/cart.html', {'a': cart_item})
+    # Process prices
+    cart_processed = []
+    for item in cart_items:
+        # Get data
+        dish = DishPrice.objects.filter(id=item['priceId']).first()
+        topping = Topping.objects.filter(id__in=item['topping']).all()
+        addition = Addition.objects.filter(id__in=item['addition']).all()
+        add_str = ', '.join([str(i) for i in topping])
+        if add_str != '' and addition:
+            add_str += ' - '
+        if addition:
+            add_str = "Extra: " + (', '.join([str(i.name) for i in addition]))
+        # Total price
+        total_price = dish.price
+        for i in addition:
+            total_price += i.price
+        
+        dish_processed = {"dish": str(dish.dish),
+                            "dimension": dish.dimension,
+                            "add": add_str,
+                            "price": total_price}
+        
+        cart_processed.append(dish_processed)
+        
+    return render(request, 'orders/cart.html', {'cart': cart_processed})
 
 
