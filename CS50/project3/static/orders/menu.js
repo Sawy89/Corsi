@@ -65,7 +65,7 @@ function showSelectedToppings() {
     toppingsName = Topp[1];
     document.querySelectorAll(".topping-disp").forEach(element => {
         if (toppingsName != null && element.dataset.navailable == toppingsName.length)
-            element.innerHTML = toppingsName; // ToDo: show a better string!
+            element.innerHTML = toppingsName.join(', ');
             // ToDO: it works also for <=???
         else
             element.innerHTML = '';
