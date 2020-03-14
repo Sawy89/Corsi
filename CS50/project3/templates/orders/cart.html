@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block head %}
+    <script src="{% static 'orders/cart.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container row">
+    <h1>Hello {{ user.username }}!</h1>
+    <p>Here is your order! Confirm and you'll have a slice of our fantastic italian taste!</p>
+</div>
+
+<div class="container row">
+    {{ a }}
+</div>
+
+{% endblock %}

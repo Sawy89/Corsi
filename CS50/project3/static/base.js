@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update cart icon
     updateCartIcon();
 
+    // Go To shopping cart
+    document.querySelector('#button-cart').addEventListener("click", () => {
+        goToCart();
+    });
+
 });
 
 
@@ -13,4 +18,23 @@ function updateCartIcon() {
         document.querySelector('#cart-element-number').innerHTML = cart.length;    
     else
         document.querySelector('#cart-element-number').innerHTML = '';
+};
+// ToDo: it gives error in some pages
+
+
+
+// Function for calling the cart page with the item in the shopping cart
+function goToCart() {
+    // Get shopping cart
+    if (!localStorage.getItem('cart-list')) {
+        alert('Attention! No item in the cart!');
+        return;
+    };
+    cart = JSON.parse(localStorage.getItem('cart-list'));
+    message = {"cart": cart};
+    messagejson = JSON.stringify(message); //.replace(/"/g, "'");
+
+    document.querySelector('#button-cart-hidden').value = messagejson;
+
+    document.querySelector("#form-cart").submit()
 };

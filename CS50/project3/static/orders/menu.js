@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showSelectedToppings();
         });
     });
-    
+
 
 });
 
@@ -105,7 +105,7 @@ function addToCart(item) {
     if (localStorage.getItem('cart-list'))
         cart = JSON.parse(localStorage.getItem('cart-list'));
     else
-    cart = [];
+        cart = [];
 
     // Prepare item
     var itemDictToAdd = {'priceId': priceid,

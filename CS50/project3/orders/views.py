@@ -55,4 +55,16 @@ def menu(request):
                                                 "Toppings": Topping.objects.all()})
 
 
-# ToDO: fissare i toppings che si muovano con la barra!
+@login_required
+def shopping_cart(request):
+    '''
+    Page with the shopping cart
+    '''
+    # Get cart item
+    form_input = request.POST['cart']
+    form_input_json = json.loads(form_input)
+    cart_item = form_input_json['cart']
+
+    return render(request, 'orders/cart.html', {'a': cart_item})
+
+
