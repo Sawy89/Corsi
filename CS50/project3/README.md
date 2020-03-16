@@ -16,3 +16,6 @@ Web Programming with Python and JavaScript
 Data are imported from "http://www.pinocchiospizza.net/menu.html" through /fextures/data.json file
 Launch the command `python manage.py loaddata data.json`
 (https://docs.djangoproject.com/en/3.0/howto/initial-data/)
+
+
+## Program
