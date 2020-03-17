@@ -13,16 +13,26 @@
     <p>Here is your order! Confirm and you'll have a slice of our fantastic italian taste!</p>
 </div>
 
-<div class="container row">
+<div class="container">
     <div class="dish-list m-2 w-75"><table class="table">
         <tr>
             <th>Dish</th>
-            <th>Dish</th>
-            <th>Dish</th>
+            <th>Addition</th>
+            <th>Price</th>
+            <th></th>
         </tr>
+
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.dish }}</td>
+            <td>{{ item.add }}</td>
+            <td>{{ item.price }}</td>
+            <td><button class="glyphicon glyphicon-trash"></button></td>
+        </tr>
+        {% endfor %}
     </table></div>
 </div>
-<p>{{ cart }}</p>
+
 <!-- ToDo: fare un bel plot dello shopping cart! -->
 
 {% endblock %}

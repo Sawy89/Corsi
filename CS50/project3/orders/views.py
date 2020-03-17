@@ -82,8 +82,7 @@ def shopping_cart(request):
         for i in addition:
             total_price += i.price
         
-        dish_processed = {"dish": str(dish.dish),
-                            "dimension": dish.dimension,
+        dish_processed = {"dish": str(dish.dish)+" ["+dish.dimension+"]",
                             "add": add_str,
                             "price": total_price}
         
