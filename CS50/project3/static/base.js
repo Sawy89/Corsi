@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Empty shopping cart if order placed
+    infoOrder = document.querySelector('#order-placed');
+    if (infoOrder.dataset.status)
+        localStorage.removeItem('cart-list');
+
     // Update cart icon
     updateCartIcon();
 

@@ -121,7 +121,7 @@ function addToCart(item) {
     // Update cart icon
     updateCartIcon();
 
-    // ToDO: add alert with product name
-    alert("Fucking yeah! Price N° "+priceid+", Dish N° "+dishid+", addition "+addition+", Topping "+toppings);
+    // ToDO: add alert with product name???
+    // alert("Fucking yeah! Price N° "+priceid+", Dish N° "+dishid+", addition "+addition+", Topping "+toppings);
 };
 
