@@ -27,12 +27,20 @@
             <td>{{ item.dish }}</td>
             <td>{{ item.add }}</td>
             <td>{{ item.price }}</td>
-            <td><button class="glyphicon glyphicon-trash"></button></td>
+            <td><button class="glyphicon glyphicon-trash" onclick="removeItemFromCart({{ item.id }})"></button></td>
         </tr>
         {% endfor %}
+
+        <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td><strong>{{ total }}</strong></td>
+        </tr>
     </table></div>
+
+
 </div>
 
-<!-- ToDo: fare un bel plot dello shopping cart! -->
-
+<!-- ToDo: remove item -->
+<!-- Todo: save order -->
 {% endblock %}

@@ -67,6 +67,7 @@ def shopping_cart(request):
 
     # Process prices
     cart_processed = []
+    total = 0
     for item in cart_items:
         # Get data
         dish = DishPrice.objects.filter(id=item['priceId']).first()
@@ -82,12 +83,14 @@ def shopping_cart(request):
         for i in addition:
             total_price += i.price
         
-        dish_processed = {"dish": str(dish.dish)+" ["+dish.dimension+"]",
+        dish_processed = {"id": item['id'],
+                            "dish": str(dish.dish)+" ["+dish.dimension+"]",
                             "add": add_str,
                             "price": total_price}
         
         cart_processed.append(dish_processed)
+        total += total_price
         
-    return render(request, 'orders/cart.html', {'cart': cart_processed})
+    return render(request, 'orders/cart.html', {'cart': cart_processed, 'total': total})
 
 

@@ -36,5 +36,5 @@ function goToCart() {
 
     document.querySelector('#button-cart-hidden').value = messagejson;
 
-    document.querySelector("#form-cart").submit()
+    document.querySelector("#form-cart").submit();
 };

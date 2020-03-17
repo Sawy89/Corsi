@@ -108,7 +108,9 @@ function addToCart(item) {
         cart = [];
 
     // Prepare item
-    var itemDictToAdd = {'priceId': priceid,
+    var d = new Date();
+    var itemDictToAdd = {'id': d.getTime(),
+                        'priceId': priceid,
                         'addition': addition,
                         'topping': toppings};
 
