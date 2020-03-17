@@ -152,3 +152,12 @@ def place_order(request):
         status = {'order_ok': False, 'alert_message': 'No OK!, there was a problem in your order. Try again later'}
 
     return render(request, 'index.html', status)
+
+
+@login_required()
+def orders(request):
+    current_user = request.user
+    orders_completed = Orders.objects.filter(user=current_user, completed=True).all()
+    orders_opened = Orders.objects.filter(user=current_user, completed=False).all()
+
+    return render(request, 'orders/orders.html', {"orders_completed": orders_completed, "orders_opened": orders_opened})

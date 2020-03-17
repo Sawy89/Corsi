@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+
+{% block content %}
+<div class="container">
+    <h1>Hello {{ user.username }}!</h1>
+    <p>Here is your orders!</p>
+</div>
+
+<div class="container">
+    <h3>Orders ongoing</h3>
+    <div class="dish-list m-2 w-75"><table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Price</th>
+        </tr>
+
+        {% for item in orders_opened %}
+        <tr>
+            <td>{{ item.insertdate }}</td>
+            <td>{{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+
+    </table></div>
+</div>
+
+<div class="container">
+    <h3>Orders completed</h3>
+    <div class="dish-list m-2 w-75"><table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Completed</th>
+        </tr>
+
+        {% for item in orders_completed %}
+        <tr>
+            <td>{{ item.insertdate }}</td>
+            <td>{{ item.total_price }}</td>
+            <td>{{ item.insertdate_completed }}</td>
+        </tr>
+        {% endfor %}
+
+    </table></div>
+</div>
+
+{% endblock %}
