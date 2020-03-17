@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from enum import Enum
 
 # Create your models here.
@@ -70,3 +71,30 @@ class Addition(models.Model):
 
     def __str__(self):
         return f"+{self.name} [{self.dish}] = +{self.price}€"
+
+
+class Orders(models.Model):
+    '''
+    Class for saving users order
+    '''
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2)
+    insertdate = models.DateTimeField(auto_now_add=True)
+    completed = models.BooleanField(default=False)
+    insertdate_completed = models.DateTimeField(default=None, null=True)
+
+
+class OrdersDish(models.Model):
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE) 
+    dish_price = models.ForeignKey(DishPrice, on_delete=models.DO_NOTHING)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+class OrdersTopping(models.Model):
+    order_dish = models.ForeignKey(OrdersDish, on_delete=models.CASCADE)
+    topping = models.ForeignKey(Topping, on_delete=models.DO_NOTHING)
+
+
+class OrdersAddition(models.Model):
+    order_dish = models.ForeignKey(OrdersDish, on_delete=models.CASCADE)
+    addition = models.ForeignKey(Addition, on_delete=models.DO_NOTHING)

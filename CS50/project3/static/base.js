@@ -22,10 +22,8 @@ function updateCartIcon() {
 // ToDo: it gives error in some pages
 
 
-
-// Function for calling the cart page with the item in the shopping cart
-function goToCart() {
-    // Get shopping cart
+// Get cart list
+function getCartList() {
     if (!localStorage.getItem('cart-list')) {
         alert('Attention! No item in the cart!');
         return;
@@ -33,6 +31,15 @@ function goToCart() {
     cart = JSON.parse(localStorage.getItem('cart-list'));
     message = {"cart": cart};
     messagejson = JSON.stringify(message); //.replace(/"/g, "'");
+
+    return messagejson
+};
+
+
+// Function for calling the cart page with the item in the shopping cart
+function goToCart() {
+    // Get shopping cart
+    messagejson = getCartList();
 
     document.querySelector('#button-cart-hidden').value = messagejson;
 

@@ -41,6 +41,16 @@
 
 </div>
 
-<!-- ToDo: remove item -->
-<!-- Todo: save order -->
+<!-- Place order
+https://getbootstrap.com/docs/3.3/components/ -->
+<div class="container">
+    <form method="POST" id="form-place-order" action="{% url 'place_order' %}" class="text-center">
+    {% csrf_token %}
+    <button type="button" id="button-order" class="btn btn-primary">
+        <span>Buy!</span>
+        <input id="button-order-hidden" type="hidden" name="cart" value="">
+    </button>
+    </form>
+
+</div>
 {% endblock %}

@@ -94,3 +94,56 @@ def shopping_cart(request):
     return render(request, 'orders/cart.html', {'cart': cart_processed, 'total': total})
 
 
+
+@login_required
+def place_order(request):
+    '''
+    Page for placing the order
+    '''
+
+    # Get cart item
+    form_input = request.POST['cart']
+    form_input_json = json.loads(form_input)
+    cart_items = form_input_json['cart']
+    current_user = request.user
+
+    # New order
+    order = Orders(user=current_user)
+    order_to_save = []
+    data_to_save = []
+
+    # Process prices
+    total = 0
+    for item in cart_items:
+        # Get data
+        dish = DishPrice.objects.filter(id=item['priceId']).first()
+        topping = Topping.objects.filter(id__in=item['topping']).all()
+        addition = Addition.objects.filter(id__in=item['addition']).all()
+        
+        # Create order data: dish & topping
+        order_dish = OrdersDish(order=order, dish_price=dish)
+        for topp in topping:
+            order_topp = OrdersTopping(order_dish=order_dish, topping=topp)
+            data_to_save.append(order_topp)
+
+        # Addition & Total price
+        total_price = dish.price
+        for addit in addition:
+            order_add = OrdersAddition(order_dish=order_dish, addition=addit)
+            data_to_save.append(order_add)
+            total_price += addit.price
+        order_dish.total_price = total_price
+        order_to_save.append(order_dish)
+        
+        total += total_price
+    
+    order.total_price = total
+
+    # Save all
+    order.save()
+    for i in order_to_save:
+        i.save()
+    for i in data_to_save:
+        i.save()
+
+    return render(request, 'index.html')

@@ -1,3 +1,13 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Place order
+    document.querySelector('#button-order').addEventListener("click", () => {
+        placeOrder();
+    });
+
+});
+
+
 // Remove item from cart
 function removeItemFromCart(itemId) {
 
@@ -11,4 +21,15 @@ function removeItemFromCart(itemId) {
     localStorage.setItem('cart-list', JSON.stringify(cart));
 
     goToCart();
+};
+
+
+// Function for calling the cart page with the item in the shopping cart
+function placeOrder() {
+    // Get shopping cart
+    messagejson = getCartList();
+
+    document.querySelector('#button-order-hidden').value = messagejson;
+
+    document.querySelector("#form-place-order").submit();
 };
