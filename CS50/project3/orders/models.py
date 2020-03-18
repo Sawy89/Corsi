@@ -109,7 +109,7 @@ class OrdersDish(models.Model):
         if addit:
             str_ += ' ['
             for item in addit:
-                str_ += item.addition.name+', '
+                str_ += '+ '+item.addition.name+', '
             str_ = str_[:-2] + '] '
 
         return str_
