@@ -158,6 +158,21 @@ def place_order(request):
 def orders(request):
     current_user = request.user
     orders_completed = Orders.objects.filter(user=current_user, completed=True).all()
+    for order in orders_completed:
+        order.n_dish = order.countDish()
+        dish = OrdersDish.objects.filter(order=order).all()
+        order.dishes = []
+        for item in dish:
+             order.dishes.append({'str_': item.getDishAddTopping(),
+                                        'price': item.total_price})
+    
     orders_opened = Orders.objects.filter(user=current_user, completed=False).all()
+    for order in orders_opened:
+        order.n_dish = order.countDish()
+        dish = OrdersDish.objects.filter(order=order).all()
+        order.dishes = []
+        for item in dish:
+             order.dishes.append({'str_': item.getDishAddTopping(),
+                                        'price': item.total_price})
 
     return render(request, 'orders/orders.html', {"orders_completed": orders_completed, "orders_opened": orders_opened})

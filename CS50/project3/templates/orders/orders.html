@@ -11,14 +11,27 @@
 <div class="container">
     <h3>Orders ongoing</h3>
     <div class="dish-list m-2 w-75"><table class="table">
-        <tr>
+        <tr class="text-center">
+            <th>Order id</th>
             <th>Date</th>
+            <th>Number dish</th>
+            <th>Dish</th>
             <th>Price</th>
         </tr>
 
         {% for item in orders_opened %}
         <tr>
+            <td>{{ item.id }}</td>
             <td>{{ item.insertdate }}</td>
+            <td>{{ item.n_dish }}</td>
+            <td><ul>
+                {% for dish in item.dishes %}
+                    <li class="row">
+                        <div class="col-8">{{ dish.str_ }}</div>
+                        <div class="col-4">{{ dish.price }}</div>
+                    </li>
+                {% endfor %}
+            </ul></td>
             <td>{{ item.total_price }}</td>
         </tr>
         {% endfor %}
@@ -29,17 +42,30 @@
 <div class="container">
     <h3>Orders completed</h3>
     <div class="dish-list m-2 w-75"><table class="table">
-        <tr>
+        <tr class="text-center">
+            <th>Order id</th>
             <th>Date</th>
+            <th>Number dish</th>
+            <th>Dish</th>
             <th>Price</th>
-            <th>Completed</th>
+            <th>Closed date</th>
         </tr>
 
         {% for item in orders_completed %}
         <tr>
+            <td>{{ item.id }}</td>
             <td>{{ item.insertdate }}</td>
+            <td>{{ item.n_dish }}</td>
+            <td><ul>
+                {% for dish in item.dishes %}
+                    <li class="row">
+                        <div class="col-8">{{ dish.str_ }}</div>
+                        <div class="col-4">{{ dish.price }}</div>
+                    </li>
+                {% endfor %}
+            </ul></td>
             <td>{{ item.total_price }}</td>
-            <td>{{ item.insertdate_completed }}</td>
+            <td></td>
         </tr>
         {% endfor %}
 

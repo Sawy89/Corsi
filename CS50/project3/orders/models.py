@@ -83,11 +83,36 @@ class Orders(models.Model):
     completed = models.BooleanField(default=False)
     insertdate_completed = models.DateTimeField(default=None, null=True)
 
+    def countDish(self):
+        return OrdersDish.objects.filter(order_id=self.id).count()
+
 
 class OrdersDish(models.Model):
     order = models.ForeignKey(Orders, on_delete=models.CASCADE) 
     dish_price = models.ForeignKey(DishPrice, on_delete=models.DO_NOTHING)
     total_price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def getDishAddTopping(self):
+        '''
+        Return the dish ordered
+        '''
+        dish = DishPrice.objects.filter(id=self.dish_price.id).first()
+        topp = OrdersTopping.objects.filter(order_dish=self)
+        addit = OrdersAddition.objects.filter(order_dish=self)
+
+        str_ = f"{dish.dish} - {dish.dimension}"
+        if topp:
+            str_ += ' ['
+            for item in topp:
+                str_ += item.topping.name+', '
+            str_ = str_[:-2] + '] '
+        if addit:
+            str_ += ' ['
+            for item in addit:
+                str_ += item.addition.name+', '
+            str_ = str_[:-2] + '] '
+
+        return str_
 
 
 class OrdersTopping(models.Model):
