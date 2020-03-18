@@ -86,11 +86,35 @@ class Orders(models.Model):
     def countDish(self):
         return OrdersDish.objects.filter(order_id=self.id).count()
 
+    def getDishes(self):
+        dishes = OrdersDish.objects.filter(order__id=self.id)
+        str_list = []
+        for dish in dishes:
+            str_list.append(dish.getDishAddTopping())
+        return str_list
+
+    def getDishes2(self):
+        dishes = OrdersDish.objects.filter(order__id=self.id)
+        str_list = []
+        for dish in dishes:
+            dish.spec = dish.getDishAddTopping2()
+        return dishes
+
 
 class OrdersDish(models.Model):
     order = models.ForeignKey(Orders, on_delete=models.CASCADE) 
     dish_price = models.ForeignKey(DishPrice, on_delete=models.DO_NOTHING)
     total_price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def getDishAddTopping2(self):
+        '''
+        Return the dish ordered
+        '''
+        dish = DishPrice.objects.filter(id=self.dish_price.id).first()
+        dish.topp = OrdersTopping.objects.filter(order_dish=self)
+        dish.addit = OrdersAddition.objects.filter(order_dish=self)
+
+        return dish
 
     def getDishAddTopping(self):
         '''
