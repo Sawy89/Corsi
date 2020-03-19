@@ -31,7 +31,7 @@ function updateCartIcon() {
 function getCartList() {
     if (!localStorage.getItem('cart-list')) {
         alert('Attention! No item in the cart!');
-        return;
+        return false;
     };
     cart = JSON.parse(localStorage.getItem('cart-list'));
     message = {"cart": cart};
@@ -46,7 +46,11 @@ function goToCart() {
     // Get shopping cart
     messagejson = getCartList();
 
-    document.querySelector('#button-cart-hidden').value = messagejson;
+    if (messagejson) {
+        document.querySelector('#button-cart-hidden').value = messagejson;
 
-    document.querySelector("#form-cart").submit();
+        document.querySelector("#form-cart").submit();
+    };
+
+    return;
 };

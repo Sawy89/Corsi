@@ -29,14 +29,18 @@ class OrdersAdmin(admin.ModelAdmin):
     )
 
     def list_dishes(self, obj):
+        '''
+        Prepare the list in HTML
+        https://stackoverflow.com/questions/43132069/django-admin-list-display-product-list
+        '''
         str_list = obj.getDishes()
         # each obj will be an Order obj/instance/row
         to_return = '<ul>'
         # I'm assuming that there is a name field under the event.Product model. If not change accordingly.
         for item in str_list:
-            to_return += '\n'.join('<li>'+item+'</li>')
+            to_return += ''.join('<li>'+item+'</li>')
         to_return += '</ul>'
-        return to_return
+        return mark_safe(to_return)
 
 
 admin.site.register(Orders, OrdersAdmin)

@@ -12,11 +12,12 @@
     <h3>Orders ongoing</h3>
     <div class="dish-list m-2 w-75"><table class="table">
         <tr>
-            <th>Order id</th>
-            <th>Date</th>
-            <th>Number dish</th>
-            <th class="text-center">Dish</th>
-            <th>Price</th>
+            <th style="width: 5%">Order id</th>
+            <th style="width: 20%">Date</th>
+            <th style="width: 5%">Number dish</th>
+            <th style="width: 45%" class="text-center">Dish</th>
+            <th style="width: 5%">Price</th>
+            <th style="width: 20%"></th>
         </tr>
 
         {% for item in orders_opened %}
@@ -33,6 +34,7 @@
                 {% endfor %}
             </ul></td>
             <td>{{ item.total_price }}</td>
+            <td></td>
         </tr>
         {% endfor %}
 
@@ -43,12 +45,12 @@
     <h3>Orders completed</h3>
     <div class="dish-list m-2 w-75"><table class="table">
         <tr>
-            <th>Order id</th>
-            <th>Date</th>
-            <th>Number dish</th>
-            <th class="text-center">Dish</th>
-            <th>Price</th>
-            <th>Closed date</th>
+            <th style="width: 5%">Order id</th>
+            <th style="width: 20%">Date</th>
+            <th style="width: 5%">Number dish</th>
+            <th style="width: 45%" class="text-center">Dish</th>
+            <th style="width: 5%">Price</th>
+            <th style="width: 20%">Closed date</th>
         </tr>
 
         {% for item in orders_completed %}
@@ -65,7 +67,7 @@
                 {% endfor %}
             </ul></td>
             <td>{{ item.total_price }}</td>
-            <td></td>
+            <td>{{ item.insertdate_completed }}</td>
         </tr>
         {% endfor %}
 
