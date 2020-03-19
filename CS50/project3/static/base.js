@@ -24,12 +24,11 @@ function updateCartIcon() {
     else
         document.querySelector('#cart-element-number').innerHTML = '';
 };
-// ToDo: it gives error in some pages
 
 
 // Get cart list
 function getCartList() {
-    if (!localStorage.getItem('cart-list')) {
+    if (!localStorage.getItem('cart-list') || localStorage.getItem('cart-list')=='') {
         alert('Attention! No item in the cart!');
         return false;
     };
@@ -45,7 +44,6 @@ function getCartList() {
 function goToCart() {
     // Get shopping cart
     messagejson = getCartList();
-
     if (messagejson) {
         document.querySelector('#button-cart-hidden').value = messagejson;
 
