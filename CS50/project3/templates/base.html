@@ -23,8 +23,15 @@
 
     <!-- Here is the logout button, always present -->
     <div class="float-right">
-      <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
+      <a href="{% url 'logout' %}" class="btn btn-info btn-lg ml-1">
         <span class="glyphicon glyphicon-log-out"></span>
+      </a>
+    </div>
+
+    <!-- Here is the HOME button -->
+    <div class="float-right">
+      <a href="{% url 'index' %}" class="btn btn-info btn-lg ml-1">
+        <span class="glyphicon glyphicon-home"></span>
       </a>
     </div>
   
@@ -32,7 +39,7 @@
     <!-- Here is the shopping cart -->
     <form method="POST" id="form-cart" action="{% url 'cart' %}" >
       {% csrf_token %}
-      <button type="button" id="button-cart" class="btn btn-default">
+      <button type="button" id="button-cart" class="btn btn-info btn-lg ml-1">
         <span id="cart" class="glyphicon glyphicon-shopping-cart"></span>
         <span>Shopping Cart</span>
         <span id="cart-element-number" class="badge badge-light"></span>
