@@ -18,4 +18,15 @@ Launch the command `python manage.py loaddata data.json`
 (https://docs.djangoproject.com/en/3.0/howto/initial-data/)
 
 
+## Configuration
+- Have docker installed
+- Have the following ENV variable in sysmet (they are taken by docker)
+```
+SET EMAIL_HOST=smtp.gmail.com
+SET EMAIL_PORT=587
+SET EMAIL_HOST_USER=myemail
+SET EMAIL_HOST_PASSWORD=pass
+```
+
 ## Program
+- Launch start.bat

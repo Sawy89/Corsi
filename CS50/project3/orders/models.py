@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from enum import Enum
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.db.models.signals import pre_save
 
 # Create your models here.
 class DishCategory(models.Model):
@@ -99,6 +102,25 @@ class Orders(models.Model):
         for dish in dishes:
             dish.spec = dish.getDishAddTopping2()
         return dishes
+
+
+@receiver(pre_save, sender=Orders)
+def orderCompleteMail(sender, instance, **kwargs):
+    '''
+    Send an email to user when the order is compelted
+    '''
+    if instance.completed == True and \
+            (Orders.objects.filter(id=instance.id).first() or Orders.objects.filter(id=instance.id).first().completed == False):
+        # Prepare Mail
+        from_mail = 'dennyeviso@gmail.com'
+        oggetto = f"Pinochio's pizza: order {instance.id} completed!"
+        testo = f"Hello {instance.user.username}, \nyour order is now completed!\n"
+        for str_dish in instance.getDishes():
+            testo += str_dish+"\n"
+        testo += "\nTotal price: "+str(instance.total_price)+"\n\n"
+        testo += "Have a great meal with Pinochio's food!"
+        # Send mail
+        send_mail(oggetto, testo, from_mail, [instance.user.email])
 
 
 class OrdersDish(models.Model):
