@@ -10,6 +10,7 @@ obj/
 *.csv
 *.db
 *.sqlite3
+*.code-workspace
 
 # Specific file
 goodreader.txt
