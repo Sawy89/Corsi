@@ -5,6 +5,7 @@ bin/
 obj/
 .vscode/
 .vs/
+.ipynb_checkpoints/
 
 # File Type
 *.csv
