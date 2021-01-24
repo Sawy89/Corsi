@@ -11,6 +11,7 @@ obj/
 *.db
 *.sqlite3
 *.code-workspace
+*.p
 
 # Specific file
 goodreader.txt
